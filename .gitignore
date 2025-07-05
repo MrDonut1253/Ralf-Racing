@@ -1,3 +1,18 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Godot generierte Dateien
+.import/
+.export/
+export.cfg
+*.godot_export
+
+# Temporäre Dateien
+*.tmp
+*.log
+
+# Optional: Entwicklungsumgebung ignorieren
+.vscode/
+.idea/
+
