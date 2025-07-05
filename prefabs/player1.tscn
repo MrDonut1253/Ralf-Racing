@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://ib3gylia75kr"]
+
+[ext_resource type="Script" uid="uid://vl3nfiyrq7dm" path="res://scripts/player.gd" id="1_weyph"]
+[ext_resource type="Texture2D" uid="uid://ivyow4ftck5m" path="res://assets/PNG/Cars/car_blue_3.png" id="2_weyph"]
+[ext_resource type="AudioStream" uid="uid://cinb53m1espse" path="res://assets/auto.mp3" id="3_ff45s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weyph"]
+radius = 32.0
+height = 132.0
+
+[node name="Player1" type="CharacterBody2D" groups=["player"]]
+z_index = 5
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_weyph")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_weyph")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_weyph")
+
+[node name="audio_auto" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_ff45s")
+volume_db = 2.0

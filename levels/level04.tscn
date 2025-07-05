@@ -1,0 +1,593 @@
+[gd_scene load_steps=38 format=4 uid="uid://dl8h66g7lisf3"]
+
+[ext_resource type="PackedScene" uid="uid://d2xi2sw4xcn45" path="res://levels/adam.tscn" id="1_7lwfn"]
+[ext_resource type="Script" uid="uid://dji242haxuoeb" path="res://scripts/game.gd" id="2_4yna5"]
+[ext_resource type="Texture2D" uid="uid://cv2b3h1ovdagb" path="res://assets/PNG/Objects/arrow_white.png" id="3_hhagu"]
+[ext_resource type="Texture2D" uid="uid://dtbd287hjff0j" path="res://assets/PNG/Objects/barrier_red_race.png" id="4_bb6yk"]
+[ext_resource type="Texture2D" uid="uid://qhmbqfbg8mm5" path="res://assets/PNG/Objects/barrier_white.png" id="5_q51hb"]
+[ext_resource type="Texture2D" uid="uid://b2qc0yvie73m5" path="res://assets/PNG/Objects/barrier_white_race.png" id="6_qs4kh"]
+[ext_resource type="Texture2D" uid="uid://d2vc5qa3s6r70" path="res://assets/PNG/Objects/barrier_red.png" id="7_bj2ec"]
+[ext_resource type="Texture2D" uid="uid://lq0ig7rb8qk1" path="res://assets/PNG/Objects/tree_small.png" id="8_w8xad"]
+[ext_resource type="Texture2D" uid="uid://bni8o1pmsokph" path="res://assets/PNG/Objects/tree_large.png" id="9_qwv72"]
+[ext_resource type="Texture2D" uid="uid://castyw4o1k6hl" path="res://assets/PNG/Objects/tribune_full.png" id="10_ccu7r"]
+[ext_resource type="Texture2D" uid="uid://bvwuyalahxesp" path="res://assets/PNG/Objects/tent_blue.png" id="11_1moma"]
+[ext_resource type="Texture2D" uid="uid://3ef0mthsc8sh" path="res://assets/PNG/Objects/tent_blue_large.png" id="12_6ao1v"]
+[ext_resource type="Texture2D" uid="uid://bdrglb0dm5y3s" path="res://assets/PNG/Objects/tent_red_large.png" id="13_1c3t4"]
+[ext_resource type="Texture2D" uid="uid://ixfdjxuuw1um" path="res://assets/PNG/Objects/tent_red.png" id="14_1ok8w"]
+[ext_resource type="Texture2D" uid="uid://by1ma0sywluhm" path="res://assets/PNG/Objects/tires_red_alt.png" id="15_if5qr"]
+[ext_resource type="Texture2D" uid="uid://dq40vomwy4hmx" path="res://assets/PNG/Objects/tires_red.png" id="16_4iw4b"]
+[ext_resource type="Texture2D" uid="uid://c77kd2ppk6u0i" path="res://assets/PNG/Objects/tires_white.png" id="17_pqdxl"]
+[ext_resource type="Texture2D" uid="uid://dbsg0kcuv120g" path="res://assets/PNG/Objects/tires_white_alt.png" id="18_1yvwa"]
+[ext_resource type="Texture2D" uid="uid://ci0si1x02hyc5" path="res://assets/PNG/Objects/rock1.png" id="19_im11s"]
+[ext_resource type="Texture2D" uid="uid://5mxkcnedsf4q" path="res://assets/PNG/Objects/rock2.png" id="20_aetsv"]
+[ext_resource type="Texture2D" uid="uid://cbggib8hjf14e" path="res://assets/PNG/Objects/rock3.png" id="21_hsh0i"]
+[ext_resource type="Texture2D" uid="uid://cm68uwn82jc7l" path="res://assets/PNG/Objects/cone_straight.png" id="22_7vl7e"]
+[ext_resource type="Texture2D" uid="uid://1m6yjk3safmx" path="res://assets/PNG/Objects/cone_down.png" id="23_40mp0"]
+[ext_resource type="Texture2D" uid="uid://xwb31j4jr00c" path="res://assets/PNG/Objects/barrel_red.png" id="24_k4f0d"]
+[ext_resource type="Texture2D" uid="uid://clsvfm4h36oro" path="res://assets/PNG/Objects/barrel_blue.png" id="25_h2sae"]
+[ext_resource type="Texture2D" uid="uid://df4vgkr5w27f6" path="res://assets/PNG/Objects/barrel_blue_down.png" id="26_y6ny0"]
+[ext_resource type="Texture2D" uid="uid://defojdovsp7db" path="res://assets/PNG/Objects/barrel_red_down.png" id="27_bg064"]
+[ext_resource type="Texture2D" uid="uid://dfvywjlgryalu" path="res://assets/PNG/Objects/oil.png" id="28_5w0kk"]
+[ext_resource type="Texture2D" uid="uid://dwcfbyw1gsk5u" path="res://assets/PNG/Objects/lights.png" id="29_n377p"]
+[ext_resource type="FontFile" uid="uid://blbvhpm4wbg3v" path="res://assets/font.ttf" id="30_1r8c0"]
+[ext_resource type="AudioStream" uid="uid://bhfp8lhom6822" path="res://assets/start.mp3" id="31_4yna5"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hgv6m"]
+a = Vector2(99, -94)
+b = Vector2(99, 420)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5p57d"]
+a = Vector2(122, -131)
+b = Vector2(123, 382)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ctpp"]
+size = Vector2(230, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oc0lp"]
+size = Vector2(240, 33.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_egx2x"]
+size = Vector2(220, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkj1c"]
+size = Vector2(126, 247)
+
+[node name="Level04" instance=ExtResource("1_7lwfn")]
+
+[node name="Game" type="Node" parent="." index="0"]
+script = ExtResource("2_4yna5")
+
+[node name="TileMapLayer" parent="." index="3"]
+tile_map_data = PackedByteArray("AAABAAUAAgAEAAcAAAADAAUAAgADAAoAAAACAAUAAgAEAAgAAAAAAAUAAgADAAoAAAD//wUAAgADAAoAAAD+/wUAAgADAAoAAAD9/wUAAgADAAoAAAD8/wUAAgADAAoAAAD7/wUAAgADAAoAAAD8/wQAAgAFAAoAAAD7/wQAAgAFAAoAAAD6/wIAAgAEAAkAAAD6/wMAAgAEAAkAAAD5/wQAAgADAAYAAAD5/wUAAgACAAYAAAD5/wMAAgAEAAsAAAD5/wIAAgAEAAsAAAD3/wIAAgACABAAAAD2/wIAAgACABEAAAD1/wMAAgACABAAAAD0/wMAAgACABEAAAD1/wIAAgADABAAAADz/wMAAgACAAUAAADy/wMAAgACAAYAAADy/wIAAgADAAYAAADy/wEAAgAEAAsAAADy/wAAAgAEAAsAAAD0/wIAAgADABEAAADz/wIAAgADAAUAAADz/wEAAgAEAAkAAADz/wAAAgAEAAkAAADz////AgAEAAkAAADy////AgAEAAsAAADy//7/AgAEAAsAAADy//3/AgAEAAsAAADz//3/AgAEAAkAAADz//z/AgAEAAUAAADz//v/AgAFAAoAAAD0//v/AgAFAAoAAAD1//v/AgAFAAoAAADz//7/AgAEAAkAAAD0//z/AgADAAoAAAD1//z/AgADAAoAAAD2//z/AgADAA8AAAAGAP3/AgABAAEAAAAHAP7/AgABAAEAAAAGAP//AgABAAEAAAAHAAAAAgABAAEAAAAHAAEAAgABAA8AAAAGAAEAAgABABEAAAAGAAAAAgAEAAoAAAAHAP//AgAEAAoAAAAGAP7/AgAEAAoAAAAHAP3/AgAEAAoAAAAGAAIAAgAEAAsAAAAGAAMAAgAEAAsAAAAHAAIAAgAEAAkAAAAHAAMAAgAEAAkAAAAHAAQAAgADAAMAAAAHAAUAAgACAAMAAAAGAAUAAgACAAQAAAAFAAUAAgADAAoAAAAEAAUAAgADAAoAAAAFAAQAAgAFAAoAAAAGAAQAAgADAAQAAAAEAAQAAgAFAAoAAAACAAQAAgAEAAsAAAACAAMAAgAEAAsAAAADAAQAAgADAAUAAAADAAMAAgAEAAkAAAADAAIAAgAEAAkAAAADAAEAAgAFAAcAAAACAAEAAgAFAAoAAAAAAAEAAgAFAAgAAAABAAEAAgAFAAoAAAACAAIAAgAEAAQAAAABAAIAAgAEAAUAAAABAAMAAgAEAAkAAAABAAQAAgAEAAkAAAAAAAIAAgAEAAsAAAAAAAMAAgAEAAsAAAAAAAQAAgADAAQAAAD//wQAAgAFAAoAAAD+/wQAAgAFAAoAAAD9/wQAAgAFAAoAAAD6/wUAAgACAAUAAAD6/wQAAgADAAUAAAD6/wEAAgAEAAMAAAD6/wAAAgAFAAMAAAD5/wAAAgAFAAQAAAD4/wEAAgADAAoAAAD5/wEAAgAEAAQAAAD4/wAAAgAFAAoAAAD3/wAAAgAEABAAAAD2/wAAAgAEABEAAAD3/wEAAgADABAAAAD1/wEAAgAEABAAAAD2/wEAAgADABEAAAD0/wEAAgAEABEAAADy//v/AgAFAAgAAADy//z/AgAEAAsAAAD2//3/AgACAA8AAAD3//3/AgACAA4AAAD3//v/AgAEAA4AAAD2//v/AgAEAA8AAAD3//z/AgADAA4AAAD4//z/AgAFAAoAAAD5//z/AgAFAAoAAAD4//3/AgADAAoAAAD5//3/AgADAAoAAAD7//3/AgACABAAAAD6//3/AgACABEAAAD6//v/AgAEABEAAAD7//v/AgAEABAAAAD6//z/AgADABEAAAD7//z/AgADABAAAAD8//v/AgAFAAoAAAD9//v/AgAFAAQAAAD8//z/AgADAAoAAAD+//v/AgAFAAMAAAD+//z/AgAEAAMAAAD9//3/AgAEAAsAAAD9//7/AgADAAYAAAD9////AgACAAYAAAD+////AgACAAUAAAD/////AgADAAoAAAAAAP//AgACAAQAAAABAP//AgACAAMAAAABAP7/AgADAAMAAAD9//z/AgAEAAQAAAD+//7/AgADAAUAAAD///7/AgAFAAoAAAAAAP7/AgADAAQAAAABAP3/AgAEAAkAAAD+//3/AgAEAAkAAAAAAP3/AgAEAAsAAAAAAPz/AgAEAAsAAAAAAPv/AgAFAAgAAAABAPv/AgAFAAoAAAACAPv/AgAFAAoAAAADAPv/AgAFAAoAAAAEAPv/AgAFAAoAAAAHAPz/AgAEAAMAAAAHAPv/AgAFAAMAAAAGAPv/AgAFAAQAAAAFAPv/AgAFAAoAAAABAPz/AgAEAAUAAAACAPz/AgADAAoAAAADAPz/AgADAAoAAAAEAPz/AgADAAoAAAAFAPz/AgADAAoAAAAGAPz/AgAEAAoAAAA=")
+
+[node name="Player1" parent="." index="4"]
+position = Vector2(1060, 145)
+rotation = -3.14159
+
+[node name="Player2" parent="." index="5"]
+position = Vector2(932, 15)
+rotation = -3.14159
+
+[node name="Barrieren" parent="." index="6"]
+visible = true
+
+[node name="CollisionShape2D" parent="Barrieren" index="0"]
+position = Vector2(1016, -210)
+shape = SubResource("SegmentShape2D_hgv6m")
+
+[node name="CollisionShape2D2" parent="Barrieren" index="1"]
+position = Vector2(745, -173)
+shape = SubResource("SegmentShape2D_5p57d")
+
+[node name="Deco" type="Node" parent="." index="7"]
+
+[node name="arrows" type="Node" parent="Deco" index="0"]
+
+[node name="ArrowWhite" type="Sprite2D" parent="Deco/arrows" index="0"]
+position = Vector2(-1090, 285)
+rotation = -1.97397
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite4" type="Sprite2D" parent="Deco/arrows" index="1"]
+position = Vector2(-974, 232)
+rotation = -1.97397
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite2" type="Sprite2D" parent="Deco/arrows" index="2"]
+position = Vector2(-1198, 344)
+rotation = -1.97397
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite3" type="Sprite2D" parent="Deco/arrows" index="3"]
+position = Vector2(-1313, 397)
+rotation = -1.97397
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite5" type="Sprite2D" parent="Deco/arrows" index="4"]
+position = Vector2(-1095, -391)
+rotation = 2.03505
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite6" type="Sprite2D" parent="Deco/arrows" index="5"]
+position = Vector2(-1004, -344)
+rotation = 2.03505
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite7" type="Sprite2D" parent="Deco/arrows" index="6"]
+position = Vector2(-582, -347)
+rotation = 1.10654
+texture = ExtResource("3_hhagu")
+
+[node name="ArrowWhite8" type="Sprite2D" parent="Deco/arrows" index="7"]
+position = Vector2(-491, -389)
+rotation = 1.10654
+texture = ExtResource("3_hhagu")
+
+[node name="Barriers" type="Node" parent="Deco" index="1"]
+
+[node name="BarrierRedRace" type="Sprite2D" parent="Deco/Barriers" index="0"]
+position = Vector2(843, -47)
+rotation = -1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("4_bb6yk")
+
+[node name="BarrierWhite" type="Sprite2D" parent="Deco/Barriers" index="1"]
+position = Vector2(843, 123)
+rotation = -1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("5_q51hb")
+
+[node name="BarrierWhite2" type="Sprite2D" parent="Deco/Barriers" index="2"]
+position = Vector2(843, -218)
+rotation = 1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("5_q51hb")
+
+[node name="BarrierWhiteRace" type="Sprite2D" parent="Deco/Barriers" index="3"]
+position = Vector2(1142, -48)
+rotation = 1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("6_qs4kh")
+
+[node name="BarrierRed" type="Sprite2D" parent="Deco/Barriers" index="4"]
+position = Vector2(1142, -219)
+rotation = 1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("7_bj2ec")
+
+[node name="BarrierRed2" type="Sprite2D" parent="Deco/Barriers" index="5"]
+position = Vector2(1142, 122)
+rotation = 1.5708
+scale = Vector2(0.82, 0.82)
+texture = ExtResource("7_bj2ec")
+
+[node name="BarrierRedRace2" type="Sprite2D" parent="Deco/Barriers" index="6"]
+position = Vector2(-42, 132)
+rotation = -3.14159
+texture = ExtResource("4_bb6yk")
+
+[node name="BarrierWhiteRace2" type="Sprite2D" parent="Deco/Barriers" index="7"]
+position = Vector2(-1250, 176)
+rotation = -0.436332
+texture = ExtResource("6_qs4kh")
+
+[node name="trees" type="Node" parent="Deco" index="2"]
+
+[node name="TreeSmall" type="Sprite2D" parent="Deco/trees" index="0"]
+position = Vector2(755, 493)
+texture = ExtResource("8_w8xad")
+
+[node name="TreeSmall2" type="Sprite2D" parent="Deco/trees" index="1"]
+position = Vector2(-386, -197)
+texture = ExtResource("8_w8xad")
+
+[node name="TreeSmall3" type="Sprite2D" parent="Deco/trees" index="2"]
+position = Vector2(-1771, 642)
+texture = ExtResource("8_w8xad")
+
+[node name="TreeLarge" type="Sprite2D" parent="Deco/trees" index="3"]
+position = Vector2(-397, 20)
+texture = ExtResource("9_qwv72")
+
+[node name="TreeSmall4" type="Sprite2D" parent="Deco/trees" index="4"]
+position = Vector2(-814, -557)
+texture = ExtResource("8_w8xad")
+
+[node name="TreeSmall5" type="Sprite2D" parent="Deco/trees" index="5"]
+position = Vector2(489, 930)
+texture = ExtResource("8_w8xad")
+
+[node name="TreeSmall6" type="Sprite2D" parent="Deco/trees" index="6"]
+position = Vector2(-89, 476)
+texture = ExtResource("8_w8xad")
+
+[node name="tribune_tent" type="Node" parent="Deco" index="3"]
+
+[node name="TribuneFull" type="Sprite2D" parent="Deco/tribune_tent" index="0"]
+position = Vector2(-982, 845)
+rotation = -2.93215
+texture = ExtResource("10_ccu7r")
+
+[node name="TribuneFull2" type="Sprite2D" parent="Deco/tribune_tent" index="1"]
+position = Vector2(-1469, 740)
+rotation = -2.75238
+texture = ExtResource("10_ccu7r")
+
+[node name="TentBlue" type="Sprite2D" parent="Deco/tribune_tent" index="2"]
+position = Vector2(-237, 337)
+texture = ExtResource("11_1moma")
+
+[node name="TentBlueLarge" type="Sprite2D" parent="Deco/tribune_tent" index="3"]
+position = Vector2(-1263, -38)
+texture = ExtResource("12_6ao1v")
+
+[node name="TentRedLarge" type="Sprite2D" parent="Deco/tribune_tent" index="4"]
+position = Vector2(580, 2)
+texture = ExtResource("13_1c3t4")
+
+[node name="TentRed" type="Sprite2D" parent="Deco/tribune_tent" index="5"]
+position = Vector2(-769, -35)
+texture = ExtResource("14_1ok8w")
+
+[node name="tires" type="Node" parent="Deco" index="4"]
+
+[node name="TiresRedAlt" type="Sprite2D" parent="Deco/tires" index="0"]
+position = Vector2(0, -221)
+texture = ExtResource("15_if5qr")
+
+[node name="TiresRed" type="Sprite2D" parent="Deco/tires" index="1"]
+position = Vector2(59, -293)
+texture = ExtResource("16_4iw4b")
+
+[node name="TiresRedAlt2" type="Sprite2D" parent="Deco/tires" index="2"]
+position = Vector2(50, -412)
+texture = ExtResource("15_if5qr")
+
+[node name="TiresRed2" type="Sprite2D" parent="Deco/tires" index="3"]
+position = Vector2(-2, -340)
+texture = ExtResource("16_4iw4b")
+
+[node name="TiresRed3" type="Sprite2D" parent="Deco/tires" index="4"]
+position = Vector2(-14, -471)
+texture = ExtResource("16_4iw4b")
+
+[node name="TiresWhite" type="Sprite2D" parent="Deco/tires" index="5"]
+position = Vector2(59, -214)
+texture = ExtResource("17_pqdxl")
+
+[node name="TiresWhiteAlt" type="Sprite2D" parent="Deco/tires" index="6"]
+position = Vector2(57, -359)
+texture = ExtResource("18_1yvwa")
+
+[node name="TiresWhiteAlt2" type="Sprite2D" parent="Deco/tires" index="7"]
+position = Vector2(51, -476)
+texture = ExtResource("18_1yvwa")
+
+[node name="TiresWhite2" type="Sprite2D" parent="Deco/tires" index="8"]
+position = Vector2(-1, -280)
+texture = ExtResource("17_pqdxl")
+
+[node name="TiresWhite3" type="Sprite2D" parent="Deco/tires" index="9"]
+position = Vector2(-6, -412)
+texture = ExtResource("17_pqdxl")
+
+[node name="TiresRed4" type="Sprite2D" parent="Deco/tires" index="10"]
+position = Vector2(-908, 371)
+texture = ExtResource("16_4iw4b")
+
+[node name="TiresWhite4" type="Sprite2D" parent="Deco/tires" index="11"]
+position = Vector2(-839, 384)
+texture = ExtResource("17_pqdxl")
+
+[node name="TiresRedAlt3" type="Sprite2D" parent="Deco/tires" index="12"]
+position = Vector2(-835, 455)
+texture = ExtResource("15_if5qr")
+
+[node name="rocks" type="Node" parent="Deco" index="5"]
+
+[node name="Rock1" type="Sprite2D" parent="Deco/rocks" index="0"]
+position = Vector2(-438, 496)
+texture = ExtResource("19_im11s")
+
+[node name="Rock2" type="Sprite2D" parent="Deco/rocks" index="1"]
+position = Vector2(-1222, 630)
+rotation = 2.15374
+texture = ExtResource("20_aetsv")
+
+[node name="Rock3" type="Sprite2D" parent="Deco/rocks" index="2"]
+position = Vector2(-1750, 364)
+rotation = -0.244346
+texture = ExtResource("21_hsh0i")
+
+[node name="Rock4" type="Sprite2D" parent="Deco/rocks" index="3"]
+position = Vector2(-1764, 16)
+rotation = 1.1973
+texture = ExtResource("19_im11s")
+
+[node name="Rock5" type="Sprite2D" parent="Deco/rocks" index="4"]
+position = Vector2(-1120, -583)
+rotation = 0.598648
+texture = ExtResource("20_aetsv")
+
+[node name="Rock6" type="Sprite2D" parent="Deco/rocks" index="5"]
+position = Vector2(2, 285)
+rotation = -3.03513
+texture = ExtResource("21_hsh0i")
+
+[node name="Rock7" type="Sprite2D" parent="Deco/rocks" index="6"]
+position = Vector2(298, 122)
+rotation = -2.93215
+texture = ExtResource("20_aetsv")
+
+[node name="Rock8" type="Sprite2D" parent="Deco/rocks" index="7"]
+position = Vector2(667, 199)
+rotation = 0.15708
+texture = ExtResource("19_im11s")
+
+[node name="Rock9" type="Sprite2D" parent="Deco/rocks" index="8"]
+position = Vector2(226, 916)
+rotation = -1.55509
+texture = ExtResource("21_hsh0i")
+
+[node name="Rock10" type="Sprite2D" parent="Deco/rocks" index="9"]
+position = Vector2(826, 924)
+rotation = -1.85529
+texture = ExtResource("20_aetsv")
+
+[node name="Rock11" type="Sprite2D" parent="Deco/rocks" index="10"]
+position = Vector2(-415, 962)
+texture = ExtResource("19_im11s")
+
+[node name="Rock12" type="Sprite2D" parent="Deco/rocks" index="11"]
+position = Vector2(1115, -538)
+rotation = -1.67552
+texture = ExtResource("19_im11s")
+
+[node name="cones" type="Node" parent="Deco" index="6"]
+
+[node name="ConeStraight" type="Sprite2D" parent="Deco/cones" index="0"]
+position = Vector2(-1697, 472)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight2" type="Sprite2D" parent="Deco/cones" index="1"]
+position = Vector2(-1667, 527)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight3" type="Sprite2D" parent="Deco/cones" index="2"]
+position = Vector2(-1714, 423)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight4" type="Sprite2D" parent="Deco/cones" index="3"]
+position = Vector2(547, 186)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeDown" type="Sprite2D" parent="Deco/cones" index="4"]
+position = Vector2(480, 178)
+rotation = -1.5708
+texture = ExtResource("23_40mp0")
+
+[node name="ConeDown2" type="Sprite2D" parent="Deco/cones" index="5"]
+position = Vector2(432, 177)
+rotation = -1.5708
+texture = ExtResource("23_40mp0")
+
+[node name="ConeStraight5" type="Sprite2D" parent="Deco/cones" index="6"]
+position = Vector2(595, 201)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight6" type="Sprite2D" parent="Deco/cones" index="7"]
+position = Vector2(142, 203)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight7" type="Sprite2D" parent="Deco/cones" index="8"]
+position = Vector2(90, 244)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight8" type="Sprite2D" parent="Deco/cones" index="9"]
+position = Vector2(65, 297)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight9" type="Sprite2D" parent="Deco/cones" index="10"]
+position = Vector2(197, 183)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight10" type="Sprite2D" parent="Deco/cones" index="11"]
+position = Vector2(1160, 705)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight11" type="Sprite2D" parent="Deco/cones" index="12"]
+position = Vector2(1088, 811)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight12" type="Sprite2D" parent="Deco/cones" index="13"]
+position = Vector2(1031, 853)
+texture = ExtResource("22_7vl7e")
+
+[node name="ConeStraight13" type="Sprite2D" parent="Deco/cones" index="14"]
+position = Vector2(1132, 771)
+texture = ExtResource("22_7vl7e")
+
+[node name="barrel" type="Node" parent="Deco" index="7"]
+
+[node name="BarrelRed" type="Sprite2D" parent="Deco/barrel" index="0"]
+position = Vector2(-248, 955)
+texture = ExtResource("24_k4f0d")
+
+[node name="BarrelRed2" type="Sprite2D" parent="Deco/barrel" index="1"]
+position = Vector2(-41, 933)
+texture = ExtResource("24_k4f0d")
+
+[node name="BarrelRed3" type="Sprite2D" parent="Deco/barrel" index="2"]
+position = Vector2(-135, 973)
+texture = ExtResource("24_k4f0d")
+
+[node name="BarrelBlue" type="Sprite2D" parent="Deco/barrel" index="3"]
+position = Vector2(-1041, -107)
+texture = ExtResource("25_h2sae")
+
+[node name="BarrelBlueDown" type="Sprite2D" parent="Deco/barrel" index="4"]
+position = Vector2(-1047, -6)
+texture = ExtResource("26_y6ny0")
+
+[node name="BarrelBlue2" type="Sprite2D" parent="Deco/barrel" index="5"]
+position = Vector2(-436, 220)
+texture = ExtResource("25_h2sae")
+
+[node name="BarrelBlueDown2" type="Sprite2D" parent="Deco/barrel" index="6"]
+position = Vector2(-413, 280)
+texture = ExtResource("26_y6ny0")
+
+[node name="BarrelBlue3" type="Sprite2D" parent="Deco/barrel" index="7"]
+position = Vector2(-468, 357)
+texture = ExtResource("25_h2sae")
+
+[node name="BarrelRed4" type="Sprite2D" parent="Deco/barrel" index="8"]
+position = Vector2(517, -215)
+texture = ExtResource("24_k4f0d")
+
+[node name="BarrelRedDown" type="Sprite2D" parent="Deco/barrel" index="9"]
+position = Vector2(603, -175)
+texture = ExtResource("27_bg064")
+
+[node name="BarrelRed5" type="Sprite2D" parent="Deco/barrel" index="10"]
+position = Vector2(-979, 624)
+texture = ExtResource("24_k4f0d")
+
+[node name="BarrelBlue4" type="Sprite2D" parent="Deco/barrel" index="11"]
+position = Vector2(-1027, 552)
+texture = ExtResource("25_h2sae")
+
+[node name="other" type="Node" parent="Deco" index="8"]
+
+[node name="Oil" type="Sprite2D" parent="Deco/other" index="0"]
+position = Vector2(-346, 284)
+rotation = 0.958186
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("28_5w0kk")
+
+[node name="Oil2" type="Sprite2D" parent="Deco/other" index="1"]
+position = Vector2(684, -172)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("28_5w0kk")
+
+[node name="Oil3" type="Sprite2D" parent="Deco/other" index="2"]
+position = Vector2(-983, -3)
+rotation = -0.958186
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("28_5w0kk")
+
+[node name="Lights" type="Sprite2D" parent="Deco/other" index="3"]
+z_index = 100
+position = Vector2(998, 269)
+rotation = -3.14159
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("29_n377p")
+
+[node name="StartFinish" type="Area2D" parent="." index="8"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartFinish" index="0"]
+position = Vector2(993, 271)
+shape = SubResource("RectangleShape2D_8ctpp")
+
+[node name="Checkpoint1" type="Area2D" parent="." index="9"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1" index="0"]
+position = Vector2(-667, 476.25)
+shape = SubResource("RectangleShape2D_oc0lp")
+
+[node name="Checkpoint2" type="Area2D" parent="." index="10"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2" index="0"]
+position = Vector2(-1565, -54)
+shape = SubResource("RectangleShape2D_egx2x")
+
+[node name="Checkpoint3" type="Area2D" parent="." index="11"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3" index="0"]
+position = Vector2(538, -430.5)
+shape = SubResource("RectangleShape2D_mkj1c")
+
+[node name="HUD" type="CanvasLayer" parent="." index="12"]
+
+[node name="CountdownLabel" type="Label" parent="HUD" index="0"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -126.5
+offset_top = -155.0
+offset_right = 126.5
+offset_bottom = -12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("30_1r8c0")
+theme_override_font_sizes/font_size = 64
+text = "Get Ready...
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TimerPlayer1" type="Label" parent="HUD" index="1"]
+offset_right = 40.0
+offset_bottom = 23.0
+theme_override_colors/font_color = Color(0.0912953, 0.396271, 0.567769, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("30_1r8c0")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="TimerPlayer2" type="Label" parent="HUD" index="2"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 35.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.697823, 0.307183, 0.0302439, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("30_1r8c0")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer1" type="Label" parent="HUD" index="3"]
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -325.0
+offset_right = 170.0
+offset_bottom = -290.0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.0901961, 0.396078, 0.568627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("30_1r8c0")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="RundenPlayer2" type="Label" parent="HUD" index="4"]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -325.0
+offset_bottom = -290.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.698039, 0.305882, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("30_1r8c0")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="audio_start" type="AudioStreamPlayer2D" parent="." index="13"]
+stream = ExtResource("31_4yna5")
+volume_db = 2.0
+
+[connection signal="body_entered" from="StartFinish" to="Game" method="on_start_finish_body_entered"]
+[connection signal="body_entered" from="Checkpoint1" to="Game" method="on_checkpoint_1_body_entered"]
+[connection signal="body_entered" from="Checkpoint2" to="Game" method="on_checkpoint_2_body_entered"]
+[connection signal="body_entered" from="Checkpoint3" to="Game" method="on_checkpoint_3_body_entered"]

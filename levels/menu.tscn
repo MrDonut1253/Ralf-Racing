@@ -1,0 +1,121 @@
+[gd_scene load_steps=8 format=3 uid="uid://bpcqpxnfru0qf"]
+
+[ext_resource type="FontFile" uid="uid://blbvhpm4wbg3v" path="res://assets/font.ttf" id="1_cnlwo"]
+[ext_resource type="Script" uid="uid://b72qexyb4dic2" path="res://scripts/start.gd" id="1_gbx6r"]
+[ext_resource type="Texture2D" uid="uid://cr42wl33w52rg" path="res://assets/background.png" id="1_kfbsc"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_gbx6r"]
+texture = ExtResource("1_kfbsc")
+modulate_color = Color(0.718381, 0.718381, 0.718381, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kfbsc"]
+bg_color = Color(0.283102, 0.348043, 0.857779, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gbx6r"]
+bg_color = Color(0.282353, 0.34902, 0.858824, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bvm7p"]
+bg_color = Color(0.351148, 0.434675, 0.920568, 1)
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+shadow_size = 6
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gbx6r")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_gbx6r")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.26
+anchor_right = 0.5
+anchor_bottom = 0.26
+offset_left = -277.0
+offset_top = -77.2
+offset_right = 264.0
+offset_bottom = 73.8
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_cnlwo")
+theme_override_font_sizes/font_size = 140
+text = "Ralf Racing"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Buttons" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -1.0
+offset_right = 184.0
+offset_bottom = 204.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="Play" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_cnlwo")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_kfbsc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gbx6r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bvm7p")
+text = "Play"
+
+[node name="ExitButton" type="Button" parent="Buttons"]
+layout_mode = 2
+size_flags_vertical = 7
+theme_override_fonts/font = ExtResource("1_cnlwo")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/hover = SubResource("StyleBoxFlat_kfbsc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_gbx6r")
+theme_override_styles/normal = SubResource("StyleBoxFlat_bvm7p")
+text = "Exit"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 150.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("1_cnlwo")
+theme_override_font_sizes/font_size = 32
+text = "von Til und Michael"
+
+[connection signal="pressed" from="Buttons/Play" to="." method="on_play_pressed"]
+[connection signal="pressed" from="Buttons/ExitButton" to="." method="on_exit_button_pressed"]
