@@ -1,0 +1,188 @@
+[gd_scene load_steps=13 format=3 uid="uid://dpuhq3hlekujc"]
+
+[ext_resource type="Script" uid="uid://dkcivxbyh1u27" path="res://levels/lobby.gd" id="1_npaa0"]
+[ext_resource type="Texture2D" uid="uid://cr42wl33w52rg" path="res://assets/background.png" id="2_ymuiv"]
+[ext_resource type="StyleBox" uid="uid://qehvrwuv47vw" path="res://levels/buton.tres" id="3_5h46i"]
+[ext_resource type="FontFile" uid="uid://blbvhpm4wbg3v" path="res://assets/font.ttf" id="3_doeiq"]
+[ext_resource type="StyleBox" uid="uid://bnx22licgkaty" path="res://levels/pressed.tres" id="4_gyuag"]
+[ext_resource type="Texture2D" uid="uid://dssbsqxjf6m1j" path="res://assets/PNG/level01.png" id="4_n1gxf"]
+[ext_resource type="StyleBox" uid="uid://cw77jbd0654k0" path="res://levels/hover.tres" id="5_ymuiv"]
+[ext_resource type="StyleBox" uid="uid://kwa7rusnsmj1" path="res://levels/focus.tres" id="6_gyuag"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_engid"]
+texture = ExtResource("2_ymuiv")
+modulate_color = Color(0.37665847, 0.37665847, 0.37665847, 1)
+
+[sub_resource type="Theme" id="Theme_63tst"]
+
+[sub_resource type="Theme" id="Theme_n1gxf"]
+default_font = ExtResource("3_doeiq")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gyuag"]
+corner_radius_top_left = 15
+corner_radius_top_right = 15
+corner_radius_bottom_right = 15
+corner_radius_bottom_left = 15
+
+[node name="lobby" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_npaa0")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_engid")
+
+[node name="ExitButton" type="Button" parent="."]
+layout_mode = 1
+offset_left = 12.0
+offset_top = 12.0
+offset_right = 190.30188
+offset_bottom = 54.0
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = ExtResource("3_5h46i")
+theme_override_styles/pressed = ExtResource("4_gyuag")
+theme_override_styles/hover = ExtResource("5_ymuiv")
+theme_override_styles/focus = ExtResource("6_gyuag")
+text = "Exit Lobby"
+
+[node name="CenterContainer" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -337.06616
+offset_top = -101.5
+offset_right = 337.06616
+offset_bottom = 101.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_n1gxf")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -479.25003
+offset_top = -317.0
+offset_right = 479.25003
+offset_bottom = 317.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_63tst")
+theme_override_constants/separation = 20
+
+[node name="CodeLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_63tst")
+theme_override_fonts/font = ExtResource("3_doeiq")
+theme_override_font_sizes/font_size = 48
+text = "LOBBY CODE: ?????"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_63tst")
+
+[node name="MapSelector" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_63tst")
+
+[node name="PrevButton" type="Button" parent="CenterContainer/VBoxContainer/MapSelector"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 50
+text = "<"
+flat = true
+
+[node name="MapInfoBox" type="VBoxContainer" parent="CenterContainer/VBoxContainer/MapSelector"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MapPreview" type="PanelContainer" parent="CenterContainer/VBoxContainer/MapSelector/MapInfoBox"]
+clip_children = 2
+custom_minimum_size = Vector2(600, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gyuag")
+
+[node name="MapImage" type="TextureRect" parent="CenterContainer/VBoxContainer/MapSelector/MapInfoBox/MapPreview"]
+layout_mode = 2
+texture = ExtResource("4_n1gxf")
+expand_mode = 1
+
+[node name="MapNameLabel" type="Label" parent="CenterContainer/VBoxContainer/MapSelector/MapInfoBox"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 32
+text = "Green Valley"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NextButton" type="Button" parent="CenterContainer/VBoxContainer/MapSelector"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+focus_mode = 0
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 50
+action_mode = 0
+text = ">"
+flat = true
+
+[node name="PlayerListLabel" type="Label" parent="CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 24
+text = "Players:"
+
+[node name="HSeparator2" type="HSeparator" parent="CenterContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+theme = SubResource("Theme_63tst")
+
+[node name="StartButton" type="Button" parent="CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -167.00003
+offset_top = 171.5
+offset_right = 167.00003
+offset_bottom = 220.5
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_63tst")
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("3_5h46i")
+theme_override_styles/pressed = ExtResource("4_gyuag")
+theme_override_styles/hover = ExtResource("5_ymuiv")
+theme_override_styles/focus = ExtResource("6_gyuag")
+text = "Start Race"
+
+[connection signal="pressed" from="ExitButton" to="." method="on_exit_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MapSelector/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MapSelector/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="CenterContainer/StartButton" to="." method="_on_start_button_pressed"]

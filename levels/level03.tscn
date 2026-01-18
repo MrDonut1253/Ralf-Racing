@@ -1,724 +1,585 @@
-[gd_scene load_steps=50 format=4 uid="uid://dgainm7nkpvvc"]
+[gd_scene load_steps=53 format=4 uid="uid://8hu83ivh6jyi"]
 
-[ext_resource type="PackedScene" uid="uid://d2xi2sw4xcn45" path="res://levels/adam.tscn" id="1_nlbnc"]
-[ext_resource type="Script" uid="uid://dji242haxuoeb" path="res://scripts/game.gd" id="2_70w5j"]
-[ext_resource type="Texture2D" uid="uid://xwb31j4jr00c" path="res://assets/PNG/Objects/barrel_red.png" id="3_72yvj"]
-[ext_resource type="Texture2D" uid="uid://clsvfm4h36oro" path="res://assets/PNG/Objects/barrel_blue.png" id="4_yew32"]
-[ext_resource type="Texture2D" uid="uid://df4vgkr5w27f6" path="res://assets/PNG/Objects/barrel_blue_down.png" id="5_2vbam"]
-[ext_resource type="Texture2D" uid="uid://defojdovsp7db" path="res://assets/PNG/Objects/barrel_red_down.png" id="6_00iw7"]
-[ext_resource type="Texture2D" uid="uid://lq0ig7rb8qk1" path="res://assets/PNG/Objects/tree_small.png" id="7_t4tk2"]
-[ext_resource type="Texture2D" uid="uid://dq40vomwy4hmx" path="res://assets/PNG/Objects/tires_red.png" id="8_vfs78"]
-[ext_resource type="Texture2D" uid="uid://c77kd2ppk6u0i" path="res://assets/PNG/Objects/tires_white.png" id="9_ectxp"]
-[ext_resource type="Texture2D" uid="uid://by1ma0sywluhm" path="res://assets/PNG/Objects/tires_red_alt.png" id="10_lvpu6"]
-[ext_resource type="Texture2D" uid="uid://dbsg0kcuv120g" path="res://assets/PNG/Objects/tires_white_alt.png" id="11_cq6av"]
-[ext_resource type="Texture2D" uid="uid://dtbd287hjff0j" path="res://assets/PNG/Objects/barrier_red_race.png" id="12_gfb6w"]
-[ext_resource type="Texture2D" uid="uid://qhmbqfbg8mm5" path="res://assets/PNG/Objects/barrier_white.png" id="13_ve513"]
-[ext_resource type="Texture2D" uid="uid://d2vc5qa3s6r70" path="res://assets/PNG/Objects/barrier_red.png" id="14_iqily"]
-[ext_resource type="Texture2D" uid="uid://b2qc0yvie73m5" path="res://assets/PNG/Objects/barrier_white_race.png" id="15_uopm8"]
-[ext_resource type="Texture2D" uid="uid://cm68uwn82jc7l" path="res://assets/PNG/Objects/cone_straight.png" id="16_f2usu"]
-[ext_resource type="Texture2D" uid="uid://1m6yjk3safmx" path="res://assets/PNG/Objects/cone_down.png" id="17_jhnpt"]
-[ext_resource type="Texture2D" uid="uid://cv2b3h1ovdagb" path="res://assets/PNG/Objects/arrow_white.png" id="18_i6mp4"]
-[ext_resource type="Texture2D" uid="uid://dotfh8ccn15vf" path="res://assets/PNG/Objects/arrow_yellow.png" id="19_q8cbg"]
-[ext_resource type="Texture2D" uid="uid://cbggib8hjf14e" path="res://assets/PNG/Objects/rock3.png" id="20_qa0mr"]
-[ext_resource type="Texture2D" uid="uid://ci0si1x02hyc5" path="res://assets/PNG/Objects/rock1.png" id="21_5nxyl"]
-[ext_resource type="Texture2D" uid="uid://5mxkcnedsf4q" path="res://assets/PNG/Objects/rock2.png" id="22_wkcr2"]
-[ext_resource type="Texture2D" uid="uid://castyw4o1k6hl" path="res://assets/PNG/Objects/tribune_full.png" id="23_w1tb2"]
-[ext_resource type="Texture2D" uid="uid://bvwuyalahxesp" path="res://assets/PNG/Objects/tent_blue.png" id="24_3yrag"]
-[ext_resource type="Texture2D" uid="uid://ixfdjxuuw1um" path="res://assets/PNG/Objects/tent_red.png" id="25_ty3l0"]
-[ext_resource type="Texture2D" uid="uid://qc46qeoseo0i" path="res://assets/PNG/Objects/tribune_overhang_red.png" id="26_lgb8n"]
-[ext_resource type="Texture2D" uid="uid://bdrglb0dm5y3s" path="res://assets/PNG/Objects/tent_red_large.png" id="27_0q87w"]
-[ext_resource type="Texture2D" uid="uid://3ef0mthsc8sh" path="res://assets/PNG/Objects/tent_blue_large.png" id="28_b8ii5"]
-[ext_resource type="Texture2D" uid="uid://bni8o1pmsokph" path="res://assets/PNG/Objects/tree_large.png" id="29_0pqgr"]
-[ext_resource type="Texture2D" uid="uid://dfvywjlgryalu" path="res://assets/PNG/Objects/oil.png" id="30_ewnb0"]
-[ext_resource type="Texture2D" uid="uid://cjkk84aoggfib" path="res://assets/PNG/Objects/skidmark_long_1.png" id="31_o31wb"]
-[ext_resource type="Texture2D" uid="uid://dwcfbyw1gsk5u" path="res://assets/PNG/Objects/lights.png" id="32_55xa8"]
-[ext_resource type="FontFile" uid="uid://blbvhpm4wbg3v" path="res://assets/font.ttf" id="33_hio44"]
-[ext_resource type="AudioStream" uid="uid://bhfp8lhom6822" path="res://assets/start.mp3" id="34_70w5j"]
+[ext_resource type="Script" uid="uid://dji242haxuoeb" path="res://scripts/game.gd" id="1_2y5hr"]
+[ext_resource type="PackedScene" uid="uid://dafxj4beld8w1" path="res://prefabs/camera.tscn" id="2_5gomw"]
+[ext_resource type="AudioStream" uid="uid://bhfp8lhom6822" path="res://assets/start.mp3" id="3_8bt7y"]
+[ext_resource type="Texture2D" uid="uid://i8r8xpflllhd" path="res://assets/Spritesheets/spritesheet_tiles.png" id="4_p4oui"]
+[ext_resource type="Texture2D" uid="uid://qhmbqfbg8mm5" path="res://assets/PNG/Objects/barrier_white.png" id="5_yxcsw"]
+[ext_resource type="Texture2D" uid="uid://b2qc0yvie73m5" path="res://assets/PNG/Objects/barrier_white_race.png" id="6_su788"]
+[ext_resource type="Texture2D" uid="uid://d2vc5qa3s6r70" path="res://assets/PNG/Objects/barrier_red.png" id="7_d1w86"]
+[ext_resource type="Texture2D" uid="uid://dtbd287hjff0j" path="res://assets/PNG/Objects/barrier_red_race.png" id="8_snb1r"]
+[ext_resource type="Texture2D" uid="uid://clsvfm4h36oro" path="res://assets/PNG/Objects/barrel_blue.png" id="9_to08q"]
+[ext_resource type="Texture2D" uid="uid://xwb31j4jr00c" path="res://assets/PNG/Objects/barrel_red.png" id="10_0ivfh"]
+[ext_resource type="Texture2D" uid="uid://df4vgkr5w27f6" path="res://assets/PNG/Objects/barrel_blue_down.png" id="11_wejxh"]
+[ext_resource type="Texture2D" uid="uid://defojdovsp7db" path="res://assets/PNG/Objects/barrel_red_down.png" id="12_c72pl"]
+[ext_resource type="Texture2D" uid="uid://c77kd2ppk6u0i" path="res://assets/PNG/Objects/tires_white.png" id="13_1oke7"]
+[ext_resource type="Texture2D" uid="uid://dq40vomwy4hmx" path="res://assets/PNG/Objects/tires_red.png" id="14_c051c"]
+[ext_resource type="Texture2D" uid="uid://dbsg0kcuv120g" path="res://assets/PNG/Objects/tires_white_alt.png" id="15_1fksl"]
+[ext_resource type="Texture2D" uid="uid://by1ma0sywluhm" path="res://assets/PNG/Objects/tires_red_alt.png" id="16_5q10o"]
+[ext_resource type="Texture2D" uid="uid://cv2b3h1ovdagb" path="res://assets/PNG/Objects/arrow_white.png" id="17_kabwr"]
+[ext_resource type="Texture2D" uid="uid://dotfh8ccn15vf" path="res://assets/PNG/Objects/arrow_yellow.png" id="18_x6q2s"]
+[ext_resource type="Texture2D" uid="uid://5mxkcnedsf4q" path="res://assets/PNG/Objects/rock2.png" id="19_4iv4x"]
+[ext_resource type="Texture2D" uid="uid://ci0si1x02hyc5" path="res://assets/PNG/Objects/rock1.png" id="20_wuv32"]
+[ext_resource type="Texture2D" uid="uid://cbggib8hjf14e" path="res://assets/PNG/Objects/rock3.png" id="21_py3d3"]
+[ext_resource type="Texture2D" uid="uid://bni8o1pmsokph" path="res://assets/PNG/Objects/tree_large.png" id="22_q5acf"]
+[ext_resource type="Texture2D" uid="uid://lq0ig7rb8qk1" path="res://assets/PNG/Objects/tree_small.png" id="23_bk5a4"]
+[ext_resource type="Texture2D" uid="uid://qc46qeoseo0i" path="res://assets/PNG/Objects/tribune_overhang_red.png" id="24_688ha"]
+[ext_resource type="Texture2D" uid="uid://castyw4o1k6hl" path="res://assets/PNG/Objects/tribune_full.png" id="25_r7umo"]
+[ext_resource type="Texture2D" uid="uid://ixfdjxuuw1um" path="res://assets/PNG/Objects/tent_red.png" id="26_6wo3v"]
+[ext_resource type="Texture2D" uid="uid://bvwuyalahxesp" path="res://assets/PNG/Objects/tent_blue.png" id="27_bnvcl"]
+[ext_resource type="Texture2D" uid="uid://bdrglb0dm5y3s" path="res://assets/PNG/Objects/tent_red_large.png" id="28_mkk1j"]
+[ext_resource type="Texture2D" uid="uid://cm68uwn82jc7l" path="res://assets/PNG/Objects/cone_straight.png" id="29_lgerg"]
+[ext_resource type="Texture2D" uid="uid://1m6yjk3safmx" path="res://assets/PNG/Objects/cone_down.png" id="30_w4jxa"]
+[ext_resource type="Texture2D" uid="uid://3ef0mthsc8sh" path="res://assets/PNG/Objects/tent_blue_large.png" id="31_8bt7y"]
+[ext_resource type="Texture2D" uid="uid://dwcfbyw1gsk5u" path="res://assets/PNG/Objects/lights.png" id="31_cttsb"]
+[ext_resource type="Texture2D" uid="uid://dfvywjlgryalu" path="res://assets/PNG/Objects/oil.png" id="32_x5khy"]
+[ext_resource type="FontFile" uid="uid://blbvhpm4wbg3v" path="res://assets/font.ttf" id="33_rhuj2"]
+[ext_resource type="Texture2D" uid="uid://cjkk84aoggfib" path="res://assets/PNG/Objects/skidmark_long_1.png" id="34_p4oui"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0mo0b"]
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yxcsw"]
+texture = ExtResource("4_p4oui")
+texture_region_size = Vector2i(128, 128)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, -64, 42.6667, -64, 32, -10.6667, -10.6667, 32, -64, 42.6667, -64)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(53.3333, -64, 64, -64, 64, 64, 32, 64, 53.3333, 0)
+4:3/0 = 0
+4:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(53.3333, 64, 64, 64, 64, -64, 32, -64, 53.3333, 0)
+5:3/0 = 0
+5:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 42.6667, 64, 32, 64, -10.6667, 10.6667, -64, -32, -64, -42.6667)
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+2:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 53.3333, -64, 64, 64, 64, 64, 32, 0, 53.3333)
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -53.3333, -64, -64, -53.3333, -64, -53.3333, -53.3333)
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-53.3333, 64, -64, 64, -64, 53.3333, -53.3333, 53.3333)
+5:4/0 = 0
+5:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -53.3333, -64, -64, 64, -64, 64, -32, 0, -53.3333)
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+2:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 53.3333, 64, 64, -64, 64, -64, 32, 0, 53.3333)
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(53.3333, -64, 64, -64, 64, -53.3333, 53.3333, -53.3333)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 53.3333, 64, 64, 53.3333, 64, 53.3333, 53.3333)
+5:5/0 = 0
+5:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -53.3333, 64, -64, -64, -64, -64, -32, 0, -53.3333)
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, -42.6667, -64, -32, -64, 10.6667, -10.6667, 64, 32, 64, 42.6667)
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-21.3333, 64, -32, 64, -64, 64, -64, -64, -53.3333, -64, -42.6667, 10.6667)
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-53.3333, 64, -64, 64, -64, -64, -32, -64, -53.3333, 0)
+5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 0, 64, -42.6667, 64, -32, 10.6667, 10.6667, -32, 64, -42.6667, 64)
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+4:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, 53.3333, 32, 32, 53.3333, -64)
+5:7/0 = 0
+5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 53.3333, 64, 32, -32, -64, -53.3333)
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+0:8/0 = 0
+1:8/0 = 0
+2:8/0 = 0
+3:8/0 = 0
+4:8/0 = 0
+4:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 64, -64, 64, -64, -64, -53.3333, -64, -32, 32, 64, 53.3333)
+5:8/0 = 0
+5:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, -64, -64, 64, -64, 64, -53.3333, -32, -32, -53.3333, 64)
+6:8/0 = 0
+7:8/0 = 0
+8:8/0 = 0
+9:8/0 = 0
+10:8/0 = 0
+11:8/0 = 0
+12:8/0 = 0
+13:8/0 = 0
+14:8/0 = 0
+15:8/0 = 0
+16:8/0 = 0
+0:9/0 = 0
+1:9/0 = 0
+2:9/0 = 0
+3:9/0 = 0
+3:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -64, 64, 64, -64, 64, -64, 53.3333, 32, 32, 53.3333, -64)
+4:9/0 = 0
+4:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(53.3333, -64, 64, -64, 64, 64, 53.3333, 64)
+5:9/0 = 0
+5:9/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, 64, 53.3333, 64, 32, -32, -64, -53.3333)
+6:9/0 = 0
+7:9/0 = 0
+8:9/0 = 0
+9:9/0 = 0
+10:9/0 = 0
+11:9/0 = 0
+12:9/0 = 0
+13:9/0 = 0
+14:9/0 = 0
+15:9/0 = 0
+16:9/0 = 0
+0:10/0 = 0
+1:10/0 = 0
+2:10/0 = 0
+3:10/0 = 0
+3:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 64, -64, 64, -64, 53.3333, 64, 53.3333)
+4:10/0 = 0
+5:10/0 = 0
+5:10/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, 64, -64, 64, -53.3333, -64, -53.3333)
+6:10/0 = 0
+7:10/0 = 0
+8:10/0 = 0
+9:10/0 = 0
+10:10/0 = 0
+11:10/0 = 0
+12:10/0 = 0
+13:10/0 = 0
+14:10/0 = 0
+15:10/0 = 0
+16:10/0 = 0
+0:11/0 = 0
+1:11/0 = 0
+2:11/0 = 0
+3:11/0 = 0
+3:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 64, -64, 64, -64, -64, -53.3333, -64, -32, 32, 64, 53.3333)
+4:11/0 = 0
+4:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, -64, -64, 64, -53.3333, 64, -53.3333, -64)
+5:11/0 = 0
+5:11/0/physics_layer_0/polygon_0/points = PackedVector2Array(-64, 64, -64, -64, 64, -64, 64, -53.3333, -32, -32, -53.3333, 64)
+6:11/0 = 0
+7:11/0 = 0
+8:11/0 = 0
+9:11/0 = 0
+10:11/0 = 0
+11:11/0 = 0
+12:11/0 = 0
+13:11/0 = 0
+14:11/0 = 0
+15:11/0 = 0
+16:11/0 = 0
+0:12/0 = 0
+1:12/0 = 0
+2:12/0 = 0
+3:12/0 = 0
+4:12/0 = 0
+5:12/0 = 0
+6:12/0 = 0
+7:12/0 = 0
+8:12/0 = 0
+9:12/0 = 0
+10:12/0 = 0
+11:12/0 = 0
+12:12/0 = 0
+13:12/0 = 0
+14:12/0 = 0
+15:12/0 = 0
+16:12/0 = 0
+0:13/0 = 0
+1:13/0 = 0
+2:13/0 = 0
+3:13/0 = 0
+4:13/0 = 0
+5:13/0 = 0
+6:13/0 = 0
+7:13/0 = 0
+8:13/0 = 0
+9:13/0 = 0
+10:13/0 = 0
+11:13/0 = 0
+12:13/0 = 0
+13:13/0 = 0
+14:13/0 = 0
+15:13/0 = 0
+16:13/0 = 0
+0:14/0 = 0
+1:14/0 = 0
+2:14/0 = 0
+2:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 32, -64, 0, -64, -10.6667, 0, 21.3333, 64, 53.3333, 64, 64)
+3:14/0 = 0
+3:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, -64, 64, -53.3333, 64, -64)
+4:14/0 = 0
+4:14/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 42.6667, -64, 10.6667, -64, 0, 0, 32, 64, 64, 42.6667, 64)
+5:14/0 = 0
+6:14/0 = 0
+7:14/0 = 0
+8:14/0 = 0
+9:14/0 = 0
+10:14/0 = 0
+11:14/0 = 0
+12:14/0 = 0
+13:14/0 = 0
+14:14/0 = 0
+15:14/0 = 0
+16:14/0 = 0
+0:15/0 = 0
+0:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, 53.3333, 64, 64, -64, 64, -64, 53.3333)
+1:15/0 = 0
+1:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(53.3333, -64, 64, -64, 64, 64, 53.3333, 64)
+2:15/0 = 0
+2:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -42.6667, 64, -10.6667, 64, 0, 0, -32, -64, -64, -42.6667, -64)
+3:15/0 = 0
+3:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, 64, -64, 53.3333, -64, 64)
+4:15/0 = 0
+4:15/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, 64, 0, 64, 10.6667, 0, -21.3333, -64, -53.3333, -64, -64)
+5:15/0 = 0
+6:15/0 = 0
+7:15/0 = 0
+8:15/0 = 0
+9:15/0 = 0
+10:15/0 = 0
+11:15/0 = 0
+12:15/0 = 0
+13:15/0 = 0
+14:15/0 = 0
+15:15/0 = 0
+16:15/0 = 0
+0:16/0 = 0
+1:16/0 = 0
+2:16/0 = 0
+2:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -42.6667, -64, -10.6667, -64, 0, 0, -32, 64, -64, 42.6667, -64)
+3:16/0 = 0
+3:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(32, 64, 64, 53.3333, 64, 64)
+4:16/0 = 0
+4:16/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -32, -64, 0, -64, 10.6667, 0, -21.3333, 64, -53.3333, 64, -64)
+5:16/0 = 0
+6:16/0 = 0
+7:16/0 = 0
+8:16/0 = 0
+9:16/0 = 0
+10:16/0 = 0
+11:16/0 = 0
+12:16/0 = 0
+13:16/0 = 0
+14:16/0 = 0
+15:16/0 = 0
+16:16/0 = 0
+0:17/0 = 0
+0:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(64, -53.3333, 64, -64, -64, -64, -64, -53.3333)
+1:17/0 = 0
+1:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-53.3333, -64, -64, -64, -64, 64, -53.3333, 64)
+2:17/0 = 0
+2:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 32, 64, 0, 64, -10.6667, 0, 21.3333, -64, 53.3333, -64, 64)
+3:17/0 = 0
+3:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(-32, -64, -64, -53.3333, -64, -64)
+4:17/0 = 0
+4:17/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, 32, 64, 0, 64, 10.6667, -42.6667, 64, -64, 64)
+5:17/0 = 0
+6:17/0 = 0
+7:17/0 = 0
+8:17/0 = 0
+9:17/0 = 0
+10:17/0 = 0
+11:17/0 = 0
+12:17/0 = 0
+13:17/0 = 0
+14:17/0 = 0
+15:17/0 = 0
+16:17/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_su788"]
+tile_size = Vector2i(128, 128)
+physics_layer_0/collision_layer = 1
+sources/2 = SubResource("TileSetAtlasSource_yxcsw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d1w86"]
+size = Vector2(528, 48)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_snb1r"]
+size = Vector2(68.5, 254)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_to08q"]
+size = Vector2(259, 99.75)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ivfh"]
+size = Vector2(144, 255)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_cq76r"]
 a = Vector2(94.375, -107.5)
 b = Vector2(-25.625, 140.5)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_lear0"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ct4fq"]
 a = Vector2(-219, 90)
 b = Vector2(-101, -156)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_85vqe"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_06n0d"]
 a = Vector2(-118, -239)
 b = Vector2(2, 11)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_p0vsl"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_mlkvi"]
 a = Vector2(-120, -237)
 b = Vector2(-1, 12)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ngl01"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_hvhgk"]
 a = Vector2(-1, -119)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_wq170"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_70ppd"]
 a = Vector2(-1, -506)
 b = Vector2(-1, 10)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_6hrdw"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_3w2mb"]
 a = Vector2(-1, -189)
 b = Vector2(1, 12)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_2wlag"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_riqwg"]
 a = Vector2(-288, -720)
 b = Vector2(-289, -91)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_3ew82"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_qhs4k"]
 a = Vector2(-1, -501)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_0bj1y"]
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2ctmq"]
 a = Vector2(-1, -118)
 b = Vector2(256, -118)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_6hrdw"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_0qlj2"]
 radius = 21.3776
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bexo4"]
-size = Vector2(528, 48)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixsi6"]
-size = Vector2(68.5, 254)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ig6od"]
-size = Vector2(259, 99.75)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lcri3"]
-size = Vector2(144, 255)
-
-[node name="Level03" instance=ExtResource("1_nlbnc")]
-position = Vector2(-23, 401)
-
-[node name="Game" type="Node" parent="." index="0"]
-script = ExtResource("2_70w5j")
-
-[node name="TileMapLayer" parent="." index="3"]
-position = Vector2(91, 34)
-tile_map_data = PackedByteArray("AAAAAAYAAgADAAoAAAABAAUAAgADAAQAAAACAAYAAgACAAMAAAABAAYAAgACAAQAAAACAAUAAgADAAMAAAAAAAUAAgAFAAoAAAD//wYAAgADAAoAAAD//wUAAgAFAAoAAAD+/wUAAgADAAUAAAD9/wUAAgADAAIAAAD+/wYAAgADAAoAAAD9/wYAAgACAAIAAAD8/wQAAgADAAoAAAD7/wQAAgADAAoAAAD8/wMAAgAFAAoAAAD7/wMAAgAFAAoAAAD6/wMAAgAFAAoAAAD5/wQAAgAEAAUAAAD5/wUAAgAFAAAAAAD4/wUAAgADAAQAAAD3/wUAAgAFAAoAAAD2/wUAAgAFAAoAAAD5/wMAAgAFAAoAAAD4/wQAAgAEAAIAAAD4/wMAAgAFAAIAAAD1/wMAAgACABAAAAD0/wMAAgACABEAAAD1/wIAAgADABAAAADz/wMAAgABAAMAAADy/wMAAgAEAAoAAADy/wIAAgABAAMAAADy/wEAAgAEAAoAAADy/wAAAgABABEAAAD0/wIAAgAEABAAAADz/wIAAgAEAAoAAADz/wEAAgABAAMAAADz/wAAAgABAA8AAADz////AgAEAAkAAADy////AgAEAAsAAADy//7/AgAEAAsAAADy//3/AgAEAAYAAADz//3/AgAEAAUAAADz//z/AgAFAAUAAADz//7/AgAEAAkAAAD0//3/AgADAAoAAAD0//z/AgAFAAoAAAD1//z/AgAFAAoAAAD2//z/AgAFAAoAAADy/wQAAgABAAMAAADz/wQAAgAEAAoAAADy//z/AgAFAAYAAAD1/wEAAgABAA4AAAD1/wAAAgAEAAoAAAD1////AgAEAAoAAAD1//7/AgAEAAoAAAD1//3/AgABAAsAAAD2//3/AgADAAoAAAD3//3/AgADAAoAAAD3//z/AgAFAAoAAAD4//7/AgADAAYAAAD5////AgACAAUAAAD4////AgACAAYAAAD6////AgADAAoAAAD7////AgADAAoAAAD8////AgACAAQAAAD8//7/AgAEAAoAAAD5//7/AgAEAAoAAAD6//7/AgAFAAoAAAD7//7/AgAFAAoAAAD9//7/AgADAAMAAAD9////AgACAAMAAAD4//3/AgAEAAQAAAD5//3/AgAEAAoAAAD6//3/AgAQAAMAAAD7//3/AgAQAAMAAAD6//z/AgARAAMAAAD7//z/AgARAAMAAAD4//z/AgAFAAoAAAD5//z/AgAFAAoAAAD8//z/AgAFAAoAAAD9//z/AgAFAAoAAAD8//3/AgAEAAoAAAD9//3/AgAEAAUAAAD+//3/AgADAAoAAAD///3/AgADAAoAAAAAAP3/AgADAAoAAAD+//z/AgAFAAoAAAD///z/AgAFAAoAAAAAAPz/AgAFAAoAAAABAP7/AgACAA8AAAACAP7/AgACAA4AAAADAP7/AgADAAoAAAABAPz/AgAEAA8AAAACAPz/AgAEAA4AAAACAP3/AgADAA4AAAABAP3/AgADAA8AAAADAP3/AgAFAAoAAAAFAP3/AgAEAA4AAAAEAP3/AgAEAA8AAAAEAP//AgACAA8AAAAFAP//AgACAA4AAAAFAP7/AgADAA4AAAAEAP7/AgADAA8AAAAHAP7/AgAFAAMAAAAGAP7/AgAFAAQAAAAHAP//AgAEAAMAAAAHAAAAAgAEAAkAAAAHAAEAAgADAAMAAAAHAAIAAgACAAMAAAAGAAIAAgACAAQAAAAGAAAAAgAEAAsAAAAGAP//AgAEAAQAAAAGAAEAAgADAAQAAAAFAAEAAgAFAAoAAAAEAAEAAgAFAAoAAAADAAEAAgAFAAoAAAACAAEAAgAFAAoAAAABAAEAAgAFAAgAAAABAAIAAgAEAAsAAAABAAMAAgAEAAsAAAAFAAIAAgADAAoAAAAEAAIAAgADAAoAAAADAAIAAgADAAoAAAACAAIAAgAEAAUAAAACAAMAAgAEAAkAAAACAAQAAgAEAAkAAAABAAQAAgAEAAsAAAD+/wQAAgACAAAAAAD+/wMAAgADAAAAAAD9/wQAAgAEAAQAAAD9/wMAAgAFAAoAAAD6/wQAAgADAAoAAAD5/wYAAgAEAAAAAAD4/wYAAgADAAoAAAD3/wYAAgADAAoAAAD2/wYAAgADAAoAAAD1/wYAAgADAAoAAAD0/wYAAgADAAoAAADz/wYAAgADAAoAAADy/wYAAgAEAAgAAADy/wUAAgAEAAsAAAD0/wUAAgAFAAoAAAD1/wUAAgAFAAoAAADz/wUAAgAEAAoAAAA=")
-
-[node name="Player1" parent="." index="4"]
-position = Vector2(-1509, 230)
-rotation = 0.0
-
-[node name="Player2" parent="." index="5"]
-position = Vector2(-1637, 357)
-rotation = 0.0
-
-[node name="Barrieren" parent="." index="6"]
-visible = true
-
-[node name="CollisionShape2D" parent="Barrieren" index="0"]
-position = Vector2(-899.375, 536.5)
-shape = SubResource("SegmentShape2D_0mo0b")
-debug_color = Color(0.0948944, 0.592821, 0.722094, 0.42)
-
-[node name="CollisionShape2D2" parent="Barrieren" index="1"]
-position = Vector2(-585, 830)
-shape = SubResource("SegmentShape2D_lear0")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Barrieren" index="2"]
-position = Vector2(-47, 665)
-shape = SubResource("SegmentShape2D_85vqe")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Barrieren" index="3"]
-position = Vector2(-164, 911)
-shape = SubResource("SegmentShape2D_p0vsl")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Barrieren" index="4"]
-position = Vector2(-1444, 665)
-shape = SubResource("SegmentShape2D_ngl01")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Barrieren" index="5"]
-position = Vector2(-1699, 666)
-shape = SubResource("SegmentShape2D_wq170")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Barrieren" index="6"]
-position = Vector2(-1444, 344)
-shape = SubResource("SegmentShape2D_6hrdw")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Barrieren" index="7"]
-position = Vector2(-900, 500)
-shape = SubResource("SegmentShape2D_2wlag")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Barrieren" index="8"]
-position = Vector2(-1317, 279)
-shape = SubResource("SegmentShape2D_3ew82")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Barrieren" index="9"]
-position = Vector2(-676, -351)
-shape = SubResource("SegmentShape2D_0bj1y")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Barrieren" index="10"]
-position = Vector2(-631, -377)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Barrieren" index="11"]
-position = Vector2(-584, -391)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="Barrieren" index="12"]
-position = Vector2(-605, -435)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D18" type="CollisionShape2D" parent="Barrieren" index="13"]
-position = Vector2(-471, -252)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D17" type="CollisionShape2D" parent="Barrieren" index="14"]
-position = Vector2(-522, -255)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D16" type="CollisionShape2D" parent="Barrieren" index="15"]
-position = Vector2(-505, -307)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="Barrieren" index="16"]
-position = Vector2(-456, -422)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="Barrieren" index="17"]
-position = Vector2(-653, -430)
-shape = SubResource("CircleShape2D_6hrdw")
-
-[node name="Deco" type="Node" parent="." index="7"]
-
-[node name="barrel" type="Node" parent="Deco" index="0"]
-
-[node name="BarrelRed" type="Sprite2D" parent="Deco/barrel" index="0"]
-position = Vector2(-1438, 586)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelBlue" type="Sprite2D" parent="Deco/barrel" index="1"]
-position = Vector2(-1437, 641)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelRed2" type="Sprite2D" parent="Deco/barrel" index="2"]
-position = Vector2(-1438, 702)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelBlue2" type="Sprite2D" parent="Deco/barrel" index="3"]
-position = Vector2(-1435, 518)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelRed3" type="Sprite2D" parent="Deco/barrel" index="4"]
-position = Vector2(-1434, 460)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelBlue3" type="Sprite2D" parent="Deco/barrel" index="5"]
-position = Vector2(-1436, 401)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelRed4" type="Sprite2D" parent="Deco/barrel" index="6"]
-position = Vector2(-1440, 333)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelBlueDown" type="Sprite2D" parent="Deco/barrel" index="7"]
-position = Vector2(-741, 536)
-texture = ExtResource("5_2vbam")
-
-[node name="BarrelBlue4" type="Sprite2D" parent="Deco/barrel" index="8"]
-position = Vector2(-750, 588)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelBlue5" type="Sprite2D" parent="Deco/barrel" index="9"]
-position = Vector2(-719, 643)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelBlue6" type="Sprite2D" parent="Deco/barrel" index="10"]
-position = Vector2(-756, 700)
-texture = ExtResource("4_yew32")
-
-[node name="BarrelRed5" type="Sprite2D" parent="Deco/barrel" index="11"]
-position = Vector2(-615, 535)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelRed6" type="Sprite2D" parent="Deco/barrel" index="12"]
-position = Vector2(-619, 594)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelRed7" type="Sprite2D" parent="Deco/barrel" index="13"]
-position = Vector2(-633, 657)
-texture = ExtResource("3_72yvj")
-
-[node name="BarrelRedDown" type="Sprite2D" parent="Deco/barrel" index="14"]
-position = Vector2(-631, 726)
-rotation = 3.14159
-texture = ExtResource("6_00iw7")
-
-[node name="TreeSmall" type="Sprite2D" parent="Deco/barrel" index="15"]
-position = Vector2(-901, 1401)
-texture = ExtResource("7_t4tk2")
-
-[node name="Tires" type="Node" parent="Deco" index="1"]
-
-[node name="TiresRed" type="Sprite2D" parent="Deco/Tires" index="0"]
-position = Vector2(-676, -29)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresWhite" type="Sprite2D" parent="Deco/Tires" index="1"]
-position = Vector2(-654, 24)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresRed2" type="Sprite2D" parent="Deco/Tires" index="2"]
-position = Vector2(-607, 10)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresRedAlt" type="Sprite2D" parent="Deco/Tires" index="3"]
-position = Vector2(-545, 146)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("10_lvpu6")
-
-[node name="TiresWhiteAlt" type="Sprite2D" parent="Deco/Tires" index="4"]
-position = Vector2(-479, -21)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("11_cq6av")
-
-[node name="TiresWhite2" type="Sprite2D" parent="Deco/Tires" index="5"]
-position = Vector2(-528, 93)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresRed3" type="Sprite2D" parent="Deco/Tires" index="6"]
-position = Vector2(-493, 148)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresWhiteAlt2" type="Sprite2D" parent="Deco/Tires" index="7"]
-position = Vector2(-627, -34)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("11_cq6av")
-
-[node name="TiresWhite3" type="Sprite2D" parent="Deco/Tires" index="8"]
-position = Vector2(-1182, 315)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresWhite4" type="Sprite2D" parent="Deco/Tires" index="9"]
-position = Vector2(-1182, 258)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresWhiteAlt3" type="Sprite2D" parent="Deco/Tires" index="10"]
-position = Vector2(-1125, 315)
-texture = ExtResource("11_cq6av")
-
-[node name="TiresRed4" type="Sprite2D" parent="Deco/Tires" index="11"]
-position = Vector2(-1180, 636)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresRedAlt2" type="Sprite2D" parent="Deco/Tires" index="12"]
-position = Vector2(-1120, 634)
-texture = ExtResource("10_lvpu6")
-
-[node name="TiresRed5" type="Sprite2D" parent="Deco/Tires" index="13"]
-position = Vector2(-1153, 581)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresRed6" type="Sprite2D" parent="Deco/Tires" index="14"]
-position = Vector2(495, 344)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresWhite5" type="Sprite2D" parent="Deco/Tires" index="15"]
-position = Vector2(561, 344)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresRedAlt3" type="Sprite2D" parent="Deco/Tires" index="16"]
-position = Vector2(-900, 851)
-texture = ExtResource("10_lvpu6")
-
-[node name="TiresWhiteAlt4" type="Sprite2D" parent="Deco/Tires" index="17"]
-position = Vector2(-918, 905)
-texture = ExtResource("11_cq6av")
-
-[node name="TiresRed7" type="Sprite2D" parent="Deco/Tires" index="18"]
-position = Vector2(-950, 966)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresWhite6" type="Sprite2D" parent="Deco/Tires" index="19"]
-position = Vector2(-984, 1031)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresRedAlt4" type="Sprite2D" parent="Deco/Tires" index="20"]
-position = Vector2(210, 239)
-texture = ExtResource("10_lvpu6")
-
-[node name="TiresWhite7" type="Sprite2D" parent="Deco/Tires" index="21"]
-position = Vector2(269, 273)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresWhiteAlt5" type="Sprite2D" parent="Deco/Tires" index="22"]
-position = Vector2(405, 331)
-texture = ExtResource("11_cq6av")
-
-[node name="TiresRed8" type="Sprite2D" parent="Deco/Tires" index="23"]
-position = Vector2(337, 314)
-texture = ExtResource("8_vfs78")
-
-[node name="TiresRedAlt5" type="Sprite2D" parent="Deco/Tires" index="24"]
-position = Vector2(628, 381)
-texture = ExtResource("10_lvpu6")
-
-[node name="TiresWhite8" type="Sprite2D" parent="Deco/Tires" index="25"]
-position = Vector2(697, 412)
-texture = ExtResource("9_ectxp")
-
-[node name="TiresRedAlt6" type="Sprite2D" parent="Deco/Tires" index="26"]
-position = Vector2(768, 445)
-texture = ExtResource("10_lvpu6")
-
-[node name="Barriers" type="Node" parent="Deco" index="2"]
-
-[node name="BarrierRedRace" type="Sprite2D" parent="Deco/Barriers" index="0"]
-position = Vector2(-1373, 435)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("12_gfb6w")
-
-[node name="BarrierWhite" type="Sprite2D" parent="Deco/Barriers" index="1"]
-position = Vector2(-1374, 593)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("13_ve513")
-
-[node name="BarrierWhite2" type="Sprite2D" parent="Deco/Barriers" index="2"]
-position = Vector2(-1372, 279)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("13_ve513")
-
-[node name="BarrierRed" type="Sprite2D" parent="Deco/Barriers" index="3"]
-position = Vector2(-1746, 980)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("14_iqily")
-
-[node name="BarrierRed3" type="Sprite2D" parent="Deco/Barriers" index="4"]
-position = Vector2(-1745, 665)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("14_iqily")
-
-[node name="BarrierWhiteRace" type="Sprite2D" parent="Deco/Barriers" index="5"]
-position = Vector2(-1745, 823)
-rotation = -1.5708
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("15_uopm8")
-
-[node name="BarrierRedRace2" type="Sprite2D" parent="Deco/Barriers" index="6"]
-position = Vector2(-580, -163)
-texture = ExtResource("12_gfb6w")
-
-[node name="BarrierWhiteRace2" type="Sprite2D" parent="Deco/Barriers" index="7"]
-position = Vector2(-925, -159)
-texture = ExtResource("15_uopm8")
-
-[node name="BarrierRedRace3" type="Sprite2D" parent="Deco/Barriers" index="8"]
-position = Vector2(136, 765)
-rotation = -1.5708
-texture = ExtResource("12_gfb6w")
-
-[node name="BarrierWhiteRace3" type="Sprite2D" parent="Deco/Barriers" index="9"]
-position = Vector2(513, 517)
-texture = ExtResource("15_uopm8")
-
-[node name="Cones" type="Node" parent="Deco" index="3"]
-
-[node name="ConeStraight3" type="Sprite2D" parent="Deco/Cones" index="0"]
-position = Vector2(-1739, 1076)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("16_f2usu")
-
-[node name="ConeStraight4" type="Sprite2D" parent="Deco/Cones" index="1"]
-position = Vector2(-1740.13, 571.5)
-scale = Vector2(0.75, 0.75)
-texture = ExtResource("16_f2usu")
-
-[node name="ConeStraight" type="Sprite2D" parent="Deco/Cones" index="2"]
-position = Vector2(-1445, 1052)
-texture = ExtResource("16_f2usu")
-
-[node name="ConeStraight2" type="Sprite2D" parent="Deco/Cones" index="3"]
-position = Vector2(-1446, 1009)
-texture = ExtResource("16_f2usu")
-
-[node name="ConeDown" type="Sprite2D" parent="Deco/Cones" index="4"]
-position = Vector2(-1444, 968)
-texture = ExtResource("17_jhnpt")
-
-[node name="ConeStraight5" type="Sprite2D" parent="Deco/Cones" index="5"]
-position = Vector2(171, 1004)
-texture = ExtResource("16_f2usu")
-
-[node name="ConeStraight6" type="Sprite2D" parent="Deco/Cones" index="6"]
-position = Vector2(121, 1051)
-texture = ExtResource("16_f2usu")
-
-[node name="Arrows" type="Node" parent="Deco" index="4"]
-
-[node name="ArrowWhite" type="Sprite2D" parent="Deco/Arrows" index="0"]
-position = Vector2(287, 97)
-rotation = 2.03505
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowWhite4" type="Sprite2D" parent="Deco/Arrows" index="1"]
-position = Vector2(749, 264)
-rotation = 2.03505
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowWhite2" type="Sprite2D" parent="Deco/Arrows" index="2"]
-position = Vector2(372, 141)
-rotation = 2.03505
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowWhite3" type="Sprite2D" parent="Deco/Arrows" index="3"]
-position = Vector2(666, 223)
-rotation = 2.03505
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowYellow" type="Sprite2D" parent="Deco/Arrows" index="4"]
-position = Vector2(-161, 1121)
-rotation = -0.47822
-texture = ExtResource("19_q8cbg")
-
-[node name="ArrowYellow2" type="Sprite2D" parent="Deco/Arrows" index="5"]
-position = Vector2(-206, 1053)
-rotation = -0.47822
-texture = ExtResource("19_q8cbg")
-
-[node name="ArrowYellow3" type="Sprite2D" parent="Deco/Arrows" index="6"]
-position = Vector2(-818, 1053)
-rotation = -2.68083
-texture = ExtResource("19_q8cbg")
-
-[node name="ArrowYellow4" type="Sprite2D" parent="Deco/Arrows" index="7"]
-position = Vector2(-862, 1133)
-rotation = -2.68083
-texture = ExtResource("19_q8cbg")
-
-[node name="ArrowWhite5" type="Sprite2D" parent="Deco/Arrows" index="8"]
-position = Vector2(-1426, 830)
-rotation = 1.07687
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowWhite6" type="Sprite2D" parent="Deco/Arrows" index="9"]
-position = Vector2(-1383, 809)
-rotation = 1.07687
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_i6mp4")
-
-[node name="ArrowWhite7" type="Sprite2D" parent="Deco/Arrows" index="10"]
-position = Vector2(-1342, 786)
-rotation = 1.07687
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("18_i6mp4")
-
-[node name="rock" type="Node" parent="Deco" index="5"]
-
-[node name="Rock3" type="Sprite2D" parent="Deco/rock" index="0"]
-position = Vector2(245, 1381)
-texture = ExtResource("20_qa0mr")
-
-[node name="Rock4" type="Sprite2D" parent="Deco/rock" index="1"]
-position = Vector2(-152, 1381)
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock5" type="Sprite2D" parent="Deco/rock" index="2"]
-position = Vector2(-976, 323)
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock6" type="Sprite2D" parent="Deco/rock" index="3"]
-position = Vector2(-125, 310)
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock7" type="Sprite2D" parent="Deco/rock" index="4"]
-position = Vector2(488, 1305)
-rotation = -3.11192
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock8" type="Sprite2D" parent="Deco/rock" index="5"]
-position = Vector2(-1443, -156)
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock9" type="Sprite2D" parent="Deco/rock" index="6"]
-position = Vector2(-340, -157)
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock1" type="Sprite2D" parent="Deco/rock" index="7"]
-position = Vector2(261, 471)
-rotation = 1.5708
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock11" type="Sprite2D" parent="Deco/rock" index="8"]
-position = Vector2(589, 937)
-rotation = -0.47822
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock2" type="Sprite2D" parent="Deco/rock" index="9"]
-position = Vector2(-1791, 1193)
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock10" type="Sprite2D" parent="Deco/rock" index="10"]
-position = Vector2(-1393, 1376)
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock12" type="Sprite2D" parent="Deco/rock" index="11"]
-position = Vector2(-1105, 1010)
-rotation = -1.35263
-texture = ExtResource("20_qa0mr")
-
-[node name="Rock13" type="Sprite2D" parent="Deco/rock" index="12"]
-position = Vector2(-1716, -122)
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock14" type="Sprite2D" parent="Deco/rock" index="13"]
-position = Vector2(314, -103)
-texture = ExtResource("20_qa0mr")
-
-[node name="Rock15" type="Sprite2D" parent="Deco/rock" index="14"]
-position = Vector2(1070, 827)
-rotation = 2.03505
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock16" type="Sprite2D" parent="Deco/rock" index="15"]
-position = Vector2(-1298, 938)
-rotation = 1.91463
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock17" type="Sprite2D" parent="Deco/rock" index="16"]
-position = Vector2(-19, 674)
-texture = ExtResource("22_wkcr2")
-
-[node name="Rock18" type="Sprite2D" parent="Deco/rock" index="17"]
-position = Vector2(-68, 808)
-rotation = 0.837758
-texture = ExtResource("21_5nxyl")
-
-[node name="Rock19" type="Sprite2D" parent="Deco/rock" index="18"]
-position = Vector2(45, 921)
-rotation = -1.1973
-texture = ExtResource("22_wkcr2")
-
-[node name="tribune_tent" type="Node" parent="Deco" index="6"]
-
-[node name="TribuneFull" type="Sprite2D" parent="Deco/tribune_tent" index="0"]
-position = Vector2(755, 1088)
-rotation = 2.6337
-texture = ExtResource("23_w1tb2")
-
-[node name="TentBlue" type="Sprite2D" parent="Deco/tribune_tent" index="1"]
-position = Vector2(-1147, 412)
-texture = ExtResource("24_3yrag")
-
-[node name="TentRed" type="Sprite2D" parent="Deco/tribune_tent" index="2"]
-position = Vector2(-1147, 728)
-texture = ExtResource("25_ty3l0")
-
-[node name="TribuneFull2" type="Sprite2D" parent="Deco/tribune_tent" index="3"]
-position = Vector2(833, -13)
-rotation = 0.359538
-texture = ExtResource("23_w1tb2")
-
-[node name="TribuneFull3" type="Sprite2D" parent="Deco/tribune_tent" index="4"]
-position = Vector2(-506, 1280)
-rotation = -3.14159
-texture = ExtResource("23_w1tb2")
-
-[node name="TribuneOverhangRed" type="Sprite2D" parent="Deco/tribune_tent" index="5"]
-position = Vector2(831, 1223)
-rotation = 2.6337
-texture = ExtResource("26_lgb8n")
-
-[node name="TentRedLarge" type="Sprite2D" parent="Deco/tribune_tent" index="6"]
-position = Vector2(-455, 630)
-texture = ExtResource("27_0q87w")
-
-[node name="TentBlueLarge" type="Sprite2D" parent="Deco/tribune_tent" index="7"]
-position = Vector2(-916, 624)
-texture = ExtResource("28_b8ii5")
-
-[node name="trees" type="Node" parent="Deco" index="7"]
-
-[node name="TreeLarge" type="Sprite2D" parent="Deco/trees" index="0"]
-position = Vector2(46, 413)
-texture = ExtResource("29_0pqgr")
-
-[node name="TreeSmall" type="Sprite2D" parent="Deco/trees" index="1"]
-position = Vector2(-1768, 1328)
-texture = ExtResource("7_t4tk2")
-
-[node name="TreeLarge2" type="Sprite2D" parent="Deco/trees" index="2"]
-position = Vector2(-224, 600)
-texture = ExtResource("29_0pqgr")
-
-[node name="TreeSmall2" type="Sprite2D" parent="Deco/trees" index="3"]
-position = Vector2(-1175, -163)
-texture = ExtResource("7_t4tk2")
-
-[node name="TreeSmall3" type="Sprite2D" parent="Deco/trees" index="4"]
-position = Vector2(-97, -157)
-texture = ExtResource("7_t4tk2")
-
-[node name="TreeLarge3" type="Sprite2D" parent="Deco/trees" index="5"]
-position = Vector2(1099, 1303)
-texture = ExtResource("29_0pqgr")
-
-[node name="other" type="Node" parent="Deco" index="8"]
-
-[node name="Oil" type="Sprite2D" parent="Deco/other" index="0"]
-position = Vector2(-1278, 421)
-texture = ExtResource("30_ewnb0")
-
-[node name="SkidmarkLong1" type="Sprite2D" parent="Deco/other" index="1"]
-position = Vector2(-1281, 587)
-texture = ExtResource("31_o31wb")
-
-[node name="Lights" type="Sprite2D" parent="Deco/other" index="2"]
-z_index = 100
-position = Vector2(-1598, 491)
-scale = Vector2(0.6, 0.6)
-texture = ExtResource("32_55xa8")
-
-[node name="Oil2" type="Sprite2D" parent="Deco/other" index="3"]
-position = Vector2(-698, 730)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("30_ewnb0")
-
-[node name="Oil3" type="Sprite2D" parent="Deco/other" index="4"]
-position = Vector2(-677, 538)
-scale = Vector2(0.5, 0.5)
-texture = ExtResource("30_ewnb0")
-
-[node name="StartFinish" type="Area2D" parent="." index="8"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartFinish" index="0"]
-position = Vector2(-1448, 97)
-shape = SubResource("RectangleShape2D_bexo4")
-
-[node name="Checkpoint1" type="Area2D" parent="." index="9"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1" index="0"]
-position = Vector2(-1008.25, -353)
-shape = SubResource("RectangleShape2D_ixsi6")
-
-[node name="Checkpoint2" type="Area2D" parent="." index="10"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2" index="0"]
-position = Vector2(346.5, 494.125)
-shape = SubResource("RectangleShape2D_ig6od")
-
-[node name="Checkpoint3" type="Area2D" parent="." index="11"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3" index="0"]
-position = Vector2(-1175, 800.5)
-shape = SubResource("RectangleShape2D_lcri3")
-
-[node name="HUD" type="CanvasLayer" parent="." index="12"]
-
-[node name="CountdownLabel" type="Label" parent="HUD" index="0"]
+[node name="Level" type="Node2D"]
+
+[node name="Game" type="Node" parent="."]
+script = ExtResource("1_2y5hr")
+
+[node name="GameMode" type="Node" parent="."]
+
+[node name="Camera2D" parent="." instance=ExtResource("2_5gomw")]
+position = Vector2(-301, 195)
+offset = Vector2(10, 0)
+zoom = Vector2(0.45, 0.45)
+
+[node name="audio_start" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_8bt7y")
+volume_db = 2.0
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("uid://ib3gylia75kr")
+spawn_path = NodePath("..")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1509, 226)
+
+[node name="2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1638, 353)
+
+[node name="3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1509, 483)
+
+[node name="4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-1636, 610)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="PlayerStatsContainer" type="HBoxContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="PanelP1" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer1" type="Label" parent="HUD/PlayerStatsContainer/PanelP1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0912953, 0.396271, 0.567769, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer1" type="Label" parent="HUD/PlayerStatsContainer/PanelP1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0901961, 0.396078, 0.568627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP2" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer2" type="Label" parent="HUD/PlayerStatsContainer/PanelP2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.697823, 0.307183, 0.0302439, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer2" type="Label" parent="HUD/PlayerStatsContainer/PanelP2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.698039, 0.305882, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP3" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer3" type="Label" parent="HUD/PlayerStatsContainer/PanelP3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42754015, 0.4034711, 4.813075e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer3" type="Label" parent="HUD/PlayerStatsContainer/PanelP3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42754015, 0.4034711, 4.813075e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP4" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer4" type="Label" parent="HUD/PlayerStatsContainer/PanelP4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(5.1740557e-07, 0.45955557, 0.10556357, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer4" type="Label" parent="HUD/PlayerStatsContainer/PanelP4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(5.1740557e-07, 0.45955557, 0.10556357, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("33_rhuj2")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="CountdownLabel" type="Label" parent="HUD"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -732,71 +593,628 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_hio44")
+theme_override_fonts/font = ExtResource("33_rhuj2")
 theme_override_font_sizes/font_size = 64
 text = "Get Ready...
 "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TimerPlayer1" type="Label" parent="HUD" index="1"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.0912953, 0.396271, 0.567769, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_hio44")
-theme_override_font_sizes/font_size = 32
-text = "Laptime: "
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+position = Vector2(-36, 0)
+tile_map_data = PackedByteArray("AAD5/wIAAgALAA0AAAD4/wIAAgALAA0AAAD3/wIAAgALAA0AAAD2/wIAAgALAA0AAAD1/wIAAgALAA0AAAD2/wEAAgALAA0AAAD3/wEAAgALAA0AAAD4/wEAAgALAA0AAAD1/wEAAgALAA0AAAD1/wAAAgALAA0AAAD2/wAAAgALAA0AAAD3/wAAAgALAA0AAAD4/wAAAgALAA0AAAD1////AgALAA0AAAD2////AgALAA0AAAD3////AgALAA0AAAD4////AgALAA0AAAD5////AgALAA0AAAD6////AgALAA0AAAD7////AgALAA0AAAD8////AgALAA0AAAD9////AgALAA0AAAD+////AgALAA0AAAD/////AgALAA0AAAD///7/AgALAA0AAAD///3/AgALAA0AAAD///z/AgALAA0AAAAAAPz/AgALAA0AAAAAAPv/AgALAA0AAAABAPv/AgALAA0AAAACAPv/AgALAA0AAAADAPv/AgALAA0AAAAEAPv/AgALAA0AAAAFAPv/AgALAA0AAAAFAPz/AgALAA0AAAAEAPz/AgALAA0AAAADAPz/AgALAA0AAAACAPz/AgALAA0AAAABAPz/AgALAA0AAAAFAP3/AgALAA0AAAAFAP7/AgALAA0AAAAFAP//AgALAA0AAAAFAAAAAgALAA0AAAAFAAEAAgALAA0AAAAFAAIAAgALAA0AAAAFAAMAAgALAA0AAAAFAAQAAgALAA0AAAAFAAUAAgALAA0AAAAFAAYAAgALAA0AAAAEAAYAAgALAA0AAAADAAYAAgALAA0AAAACAAYAAgALAA0AAAABAAYAAgALAA0AAAAAAAYAAgALAA0AAAD//wYAAgALAA0AAAD+/wYAAgALAA0AAAD9/wYAAgALAA0AAAD8/wYAAgALAA0AAAD7/wYAAgALAA0AAAD6/wYAAgALAA0AAAD5/wYAAgALAA0AAAD4/wYAAgALAA0AAAD3/wYAAgALAA0AAAD2/wYAAgALAA0AAAD1/wYAAgALAA0AAAD1/wcAAgALAA0AAAD2/wcAAgALAA0AAAD3/wcAAgALAA0AAAD4/wcAAgALAA0AAAD5/wcAAgALAA0AAAD6/wcAAgALAA0AAAD7/wcAAgALAA0AAAD8/wcAAgALAA0AAAD9/wcAAgALAA0AAAD+/wcAAgALAA0AAAD//wcAAgALAA0AAAAAAAcAAgALAA0AAAABAAcAAgALAA0AAAACAAcAAgALAA0AAAADAAcAAgALAA0AAAAEAAcAAgALAA0AAAAFAAcAAgALAA0AAAD1/wMAAgALAA0AAAD1/wQAAgALAA0AAAD1/wUAAgALAA0AAAD2/wUAAgALAA0AAAD3/wUAAgALAA0AAAD4/wUAAgALAA0AAAD5/wUAAgALAA0AAAD6/wUAAgALAA0AAAD7/wUAAgALAA0AAAD8/wUAAgALAA0AAAD9/wUAAgALAA0AAAD+/wUAAgALAA0AAAD//wUAAgALAA0AAAAAAAUAAgALAA0AAAABAAUAAgALAA0AAAACAAUAAgALAA0AAAADAAUAAgALAA0AAAAEAAUAAgALAA0AAAAEAAQAAgALAA0AAAAEAAMAAgALAA0AAAADAAMAAgALAA0AAAADAAIAAgALAA0AAAADAAEAAgALAA0AAAADAAAAAgALAA0AAAADAP//AgALAA0AAAAEAP7/AgALAA0AAAAEAP3/AgALAA0AAAAEAP//AgALAA0AAAAEAAAAAgALAA0AAAAEAAEAAgALAA0AAAAEAAIAAgALAA0AAAADAP7/AgALAA0AAAADAP3/AgALAA0AAAACAP3/AgALAA0AAAABAP3/AgALAA0AAAAAAP3/AgALAA0AAAAAAP7/AgALAA0AAAAAAP//AgALAA0AAAABAP//AgALAA0AAAACAP//AgALAA0AAAACAP7/AgALAA0AAAABAP7/AgALAA0AAAACAAAAAgALAA0AAAABAAAAAgALAA0AAAACAAEAAgALAA0AAAACAAIAAgALAA0AAAACAAMAAgALAA0AAAACAAQAAgALAA0AAAABAAQAAgALAA0AAAAAAAQAAgALAA0AAAD//wQAAgALAA0AAAD+/wQAAgALAA0AAAD9/wQAAgALAA0AAAD8/wQAAgALAA0AAAD7/wQAAgALAA0AAAD6/wQAAgALAA0AAAD5/wQAAgALAA0AAAD4/wQAAgALAA0AAAD3/wQAAgALAA0AAAD2/wQAAgALAA0AAAD2/wMAAgALAA0AAAD3/wMAAgALAA0AAAD4/wMAAgALAA0AAAD5/wMAAgALAA0AAAD6/wMAAgALAA0AAAD7/wMAAgALAA0AAAD8/wMAAgALAA0AAAD9/wMAAgALAA0AAAD+/wMAAgALAA0AAAD//wMAAgALAA0AAAAAAAMAAgALAA0AAAABAAMAAgALAA0AAAADAAQAAgALAA0AAAABAAIAAgALAA0AAAAAAAIAAgALAA0AAAAAAAEAAgALAA0AAAAAAAAAAgALAA0AAAD//wAAAgALAA0AAAD+/wAAAgALAA0AAAD9/wAAAgALAA0AAAD8/wAAAgALAA0AAAD7/wAAAgALAA0AAAD6/wAAAgALAA0AAAD5/wAAAgALAA0AAAD5/wEAAgALAA0AAAD6/wEAAgALAA0AAAD7/wEAAgALAA0AAAD8/wEAAgALAA0AAAD9/wEAAgALAA0AAAD+/wEAAgALAA0AAAD//wEAAgALAA0AAAABAAEAAgALAA0AAAD//wIAAgALAA0AAAD+/wIAAgALAA0AAAD9/wIAAgALAA0AAAD8/wIAAgALAA0AAAD7/wIAAgALAA0AAAD6/wIAAgALAA0AAAD///v/AgALAA0AAAD+//v/AgALAA0AAAD9//v/AgALAA0AAAD8//v/AgALAA0AAAD7//v/AgALAA0AAAD6//v/AgALAA0AAAD5//v/AgALAA0AAAD4//v/AgALAA0AAAD3//v/AgALAA0AAAD2//v/AgALAA0AAAD1//v/AgALAA0AAAD1//z/AgALAA0AAAD1//3/AgALAA0AAAD1//7/AgALAA0AAAD2//7/AgALAA0AAAD3//7/AgALAA0AAAD4//7/AgALAA0AAAD5//7/AgALAA0AAAD6//7/AgALAA0AAAD7//7/AgALAA0AAAD8//7/AgALAA0AAAD9//7/AgALAA0AAAD+//7/AgALAA0AAAD+//3/AgALAA0AAAD+//z/AgALAA0AAAD9//z/AgALAA0AAAD8//z/AgALAA0AAAD7//z/AgALAA0AAAD6//z/AgALAA0AAAD5//z/AgALAA0AAAD4//z/AgALAA0AAAD3//z/AgALAA0AAAD2//z/AgALAA0AAAD3//3/AgALAA0AAAD4//3/AgALAA0AAAD5//3/AgALAA0AAAD6//3/AgALAA0AAAD7//3/AgALAA0AAAD8//3/AgALAA0AAAD9//3/AgALAA0AAAD2//3/AgALAA0AAAAGAPv/AgALAA0AAAAHAPv/AgALAA0AAAAIAPv/AgALAA0AAAAJAPv/AgALAA0AAAAJAPz/AgALAA0AAAAJAP3/AgALAA0AAAAJAP7/AgALAA0AAAAJAP//AgALAA0AAAAJAAAAAgALAA0AAAAJAAEAAgALAA0AAAAJAAIAAgALAA0AAAAJAAMAAgALAA0AAAAJAAQAAgALAA0AAAAJAAUAAgALAA0AAAAJAAYAAgALAA0AAAAJAAcAAgALAA0AAAAIAAcAAgALAA0AAAAHAAcAAgALAA0AAAAGAAcAAgALAA0AAAAGAAYAAgALAA0AAAAGAAUAAgALAA0AAAAGAAQAAgALAA0AAAAGAAMAAgALAA0AAAAGAAIAAgALAA0AAAAGAAEAAgALAA0AAAAGAAAAAgALAA0AAAAGAP//AgALAA0AAAAGAP7/AgALAA0AAAAGAP3/AgALAA0AAAAGAPz/AgALAA0AAAAHAAYAAgALAA0AAAAIAAYAAgALAA0AAAAIAAUAAgALAA0AAAAIAAQAAgALAA0AAAAIAAMAAgALAA0AAAAIAAIAAgALAA0AAAAIAAEAAgALAA0AAAAIAP//AgALAA0AAAAIAP7/AgALAA0AAAAIAP3/AgALAA0AAAAIAPz/AgALAA0AAAAHAPz/AgALAA0AAAAHAP3/AgALAA0AAAAHAP7/AgALAA0AAAAHAP//AgALAA0AAAAHAAAAAgALAA0AAAAHAAEAAgALAA0AAAAHAAIAAgALAA0AAAAHAAMAAgALAA0AAAAHAAQAAgALAA0AAAAHAAUAAgALAA0AAAAIAAAAAgALAA0AAAD0//v/AgALAA0AAADz//v/AgALAA0AAADy//v/AgALAA0AAADy//z/AgALAA0AAADy//3/AgALAA0AAADy//7/AgALAA0AAADy////AgALAA0AAADy/wAAAgALAA0AAADy/wEAAgALAA0AAADy/wIAAgALAA0AAADy/wMAAgALAA0AAADy/wQAAgALAA0AAADy/wUAAgALAA0AAADy/wYAAgALAA0AAADy/wcAAgALAA0AAADz/wcAAgALAA0AAAD0/wcAAgALAA0AAAD0/wYAAgALAA0AAAD0/wUAAgALAA0AAAD0/wQAAgALAA0AAAD0/wMAAgALAA0AAAD0/wIAAgALAA0AAAD0/wEAAgALAA0AAAD0/wAAAgALAA0AAAD0////AgALAA0AAAD0//7/AgALAA0AAAD0//3/AgALAA0AAAD0//z/AgALAA0AAADz//z/AgALAA0AAADz//3/AgALAA0AAADz//7/AgALAA0AAADz////AgALAA0AAADz/wAAAgALAA0AAADz/wEAAgALAA0AAADz/wIAAgALAA0AAADz/wMAAgALAA0AAADz/wQAAgALAA0AAADz/wUAAgALAA0AAADz/wYAAgALAA0AAAA=")
+tile_set = SubResource("TileSet_su788")
 
-[node name="TimerPlayer2" type="Label" parent="HUD" index="2"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 35.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.697823, 0.307183, 0.0302439, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_hio44")
-theme_override_font_sizes/font_size = 32
-text = "Laptime: "
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(91, 34)
+tile_map_data = PackedByteArray("AAAAAAYAAgADAAoAAAABAAUAAgADAAQAAAACAAYAAgACAAMAAAABAAYAAgACAAQAAAACAAUAAgADAAMAAAAAAAUAAgAFAAoAAAD//wYAAgADAAoAAAD//wUAAgAFAAoAAAD+/wUAAgADAAUAAAD9/wUAAgADAAIAAAD+/wYAAgADAAoAAAD9/wYAAgACAAIAAAD8/wQAAgADAAoAAAD7/wQAAgADAAoAAAD8/wMAAgAFAAoAAAD7/wMAAgAFAAoAAAD6/wMAAgAFAAoAAAD5/wQAAgAEAAUAAAD5/wUAAgAFAAAAAAD4/wUAAgADAAQAAAD3/wUAAgAFAAoAAAD2/wUAAgAFAAoAAAD5/wMAAgAFAAoAAAD4/wQAAgAEAAIAAAD4/wMAAgAFAAIAAAD1/wMAAgACABAAAAD0/wMAAgACABEAAAD1/wIAAgADABAAAADz/wMAAgABAAMAAADy/wMAAgAEAAoAAADy/wIAAgABAAMAAADy/wEAAgAEAAoAAADy/wAAAgABABEAAAD0/wIAAgAEABAAAADz/wIAAgAEAAoAAADz/wEAAgABAAMAAADz/wAAAgABAA8AAADz////AgAEAAkAAADy////AgAEAAsAAADy//7/AgAEAAsAAADy//3/AgAEAAYAAADz//3/AgAEAAUAAADz//z/AgAFAAUAAADz//7/AgAEAAkAAAD0//3/AgADAAoAAAD0//z/AgAFAAoAAAD1//z/AgAFAAoAAAD2//z/AgAFAAoAAADy/wQAAgABAAMAAADz/wQAAgAEAAoAAADy//z/AgAFAAYAAAD1/wEAAgABAA4AAAD1/wAAAgAEAAoAAAD1////AgAEAAoAAAD1//7/AgAEAAoAAAD1//3/AgABAAsAAAD2//3/AgADAAoAAAD3//3/AgADAAoAAAD3//z/AgAFAAoAAAD4//7/AgADAAYAAAD5////AgACAAUAAAD4////AgACAAYAAAD6////AgADAAoAAAD7////AgADAAoAAAD8////AgACAAQAAAD8//7/AgAEAAoAAAD5//7/AgAEAAoAAAD6//7/AgAFAAoAAAD7//7/AgAFAAoAAAD9//7/AgADAAMAAAD9////AgACAAMAAAD4//3/AgAEAAQAAAD5//3/AgAEAAoAAAD6//3/AgAQAAMAAAD7//3/AgAQAAMAAAD6//z/AgARAAMAAAD7//z/AgARAAMAAAD4//z/AgAFAAoAAAD5//z/AgAFAAoAAAD8//z/AgAFAAoAAAD9//z/AgAFAAoAAAD8//3/AgAEAAoAAAD9//3/AgAEAAUAAAD+//3/AgADAAoAAAD///3/AgADAAoAAAAAAP3/AgADAAoAAAD+//z/AgAFAAoAAAD///z/AgAFAAoAAAAAAPz/AgAFAAoAAAABAP7/AgACAA8AAAACAP7/AgACAA4AAAADAP7/AgADAAoAAAABAPz/AgAEAA8AAAACAPz/AgAEAA4AAAACAP3/AgADAA4AAAABAP3/AgADAA8AAAADAP3/AgAFAAoAAAAFAP3/AgAEAA4AAAAEAP3/AgAEAA8AAAAEAP//AgACAA8AAAAFAP//AgACAA4AAAAFAP7/AgADAA4AAAAEAP7/AgADAA8AAAAHAP7/AgAFAAMAAAAGAP7/AgAFAAQAAAAHAP//AgAEAAMAAAAHAAAAAgAEAAkAAAAHAAEAAgADAAMAAAAHAAIAAgACAAMAAAAGAAIAAgACAAQAAAAGAAAAAgAEAAsAAAAGAP//AgAEAAQAAAAGAAEAAgADAAQAAAAFAAEAAgAFAAoAAAAEAAEAAgAFAAoAAAADAAEAAgAFAAoAAAACAAEAAgAFAAoAAAABAAEAAgAFAAgAAAABAAIAAgAEAAsAAAABAAMAAgAEAAsAAAAFAAIAAgADAAoAAAAEAAIAAgADAAoAAAADAAIAAgADAAoAAAACAAIAAgAEAAUAAAACAAMAAgAEAAkAAAACAAQAAgAEAAkAAAABAAQAAgAEAAsAAAD+/wQAAgACAAAAAAD+/wMAAgADAAAAAAD9/wQAAgAEAAQAAAD9/wMAAgAFAAoAAAD6/wQAAgADAAoAAAD5/wYAAgAEAAAAAAD4/wYAAgADAAoAAAD3/wYAAgADAAoAAAD2/wYAAgADAAoAAAD1/wYAAgADAAoAAAD0/wYAAgADAAoAAADz/wYAAgADAAoAAADy/wYAAgAEAAgAAADy/wUAAgAEAAsAAAD0/wUAAgAFAAoAAAD1/wUAAgAFAAoAAADz/wUAAgAEAAoAAAA=")
+tile_set = SubResource("TileSet_su788")
 
-[node name="RundenPlayer1" type="Label" parent="HUD" index="3"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -325.0
-offset_right = 170.0
-offset_bottom = -290.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.0901961, 0.396078, 0.568627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_hio44")
-theme_override_font_sizes/font_size = 32
-text = "Completed Laps:"
+[node name="Deco" type="Node" parent="."]
 
-[node name="RundenPlayer2" type="Label" parent="HUD" index="4"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -325.0
-offset_bottom = -290.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.698039, 0.305882, 0.0313726, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("33_hio44")
-theme_override_font_sizes/font_size = 32
-text = "Completed Laps:"
+[node name="barrel" type="Node" parent="Deco"]
 
-[node name="audio_start" type="AudioStreamPlayer2D" parent="." index="13"]
-stream = ExtResource("34_70w5j")
-volume_db = 2.0
+[node name="BarrelRed" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1411, 189)
+texture = ExtResource("10_0ivfh")
 
-[connection signal="body_entered" from="StartFinish" to="Game" method="on_start_finish_body_entered"]
-[connection signal="body_entered" from="Checkpoint1" to="Game" method="on_checkpoint_1_body_entered"]
-[connection signal="body_entered" from="Checkpoint2" to="Game" method="on_checkpoint_2_body_entered"]
-[connection signal="body_entered" from="Checkpoint3" to="Game" method="on_checkpoint_3_body_entered"]
+[node name="BarrelBlue" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1410, 244)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelRed2" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1411, 305)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelBlue2" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1408, 121)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelRed3" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1407, 63)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelBlue3" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1409, 4)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelRed4" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-1413, -64)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelBlueDown" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-714, 139)
+texture = ExtResource("11_wejxh")
+
+[node name="BarrelBlue4" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-723, 191)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelBlue5" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-692, 246)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelBlue6" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-729, 303)
+texture = ExtResource("9_to08q")
+
+[node name="BarrelRed5" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-588, 138)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelRed6" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-592, 197)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelRed7" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-606, 260)
+texture = ExtResource("10_0ivfh")
+
+[node name="BarrelRedDown" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-604, 329)
+rotation = 3.14159
+texture = ExtResource("12_c72pl")
+
+[node name="TreeSmall" type="Sprite2D" parent="Deco/barrel"]
+position = Vector2(-874, 1004)
+texture = ExtResource("23_bk5a4")
+
+[node name="Tires" type="Node" parent="Deco"]
+
+[node name="TiresRed" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-649, -426)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("14_c051c")
+
+[node name="TiresWhite" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-627, -373)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresRed2" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-580, -387)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("14_c051c")
+
+[node name="TiresRedAlt" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-518, -251)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("16_5q10o")
+
+[node name="TiresWhiteAlt" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-452, -418)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("15_1fksl")
+
+[node name="TiresWhite2" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-501, -304)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresRed3" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-466, -249)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("14_c051c")
+
+[node name="TiresWhiteAlt2" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-600, -431)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("15_1fksl")
+
+[node name="TiresWhite3" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1155, -82)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresWhite4" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1155, -139)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresWhiteAlt3" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1098, -82)
+texture = ExtResource("15_1fksl")
+
+[node name="TiresRed4" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1153, 239)
+texture = ExtResource("14_c051c")
+
+[node name="TiresRedAlt2" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1093, 237)
+texture = ExtResource("16_5q10o")
+
+[node name="TiresRed5" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-1126, 184)
+texture = ExtResource("14_c051c")
+
+[node name="TiresRed6" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(522, -53)
+texture = ExtResource("14_c051c")
+
+[node name="TiresWhite5" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(588, -53)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresRedAlt3" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-873, 454)
+texture = ExtResource("16_5q10o")
+
+[node name="TiresWhiteAlt4" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-891, 508)
+texture = ExtResource("15_1fksl")
+
+[node name="TiresRed7" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-923, 569)
+texture = ExtResource("14_c051c")
+
+[node name="TiresWhite6" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(-957, 634)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresRedAlt4" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(237, -158)
+texture = ExtResource("16_5q10o")
+
+[node name="TiresWhite7" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(296, -124)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresWhiteAlt5" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(432, -66)
+texture = ExtResource("15_1fksl")
+
+[node name="TiresRed8" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(364, -83)
+texture = ExtResource("14_c051c")
+
+[node name="TiresRedAlt5" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(655, -16)
+texture = ExtResource("16_5q10o")
+
+[node name="TiresWhite8" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(724, 15)
+texture = ExtResource("13_1oke7")
+
+[node name="TiresRedAlt6" type="Sprite2D" parent="Deco/Tires"]
+position = Vector2(795, 48)
+texture = ExtResource("16_5q10o")
+
+[node name="Barriers" type="Node" parent="Deco"]
+
+[node name="BarrierRedRace" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1346, 38)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("8_snb1r")
+
+[node name="BarrierWhite" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1347, 196)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_yxcsw")
+
+[node name="BarrierWhite2" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1345, -118)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("5_yxcsw")
+
+[node name="BarrierRed" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1719, 583)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_d1w86")
+
+[node name="BarrierRed3" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1718, 268)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("7_d1w86")
+
+[node name="BarrierWhiteRace" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-1718, 426)
+rotation = -1.5708
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("6_su788")
+
+[node name="BarrierRedRace2" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-553, -560)
+texture = ExtResource("8_snb1r")
+
+[node name="BarrierWhiteRace2" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(-898, -556)
+texture = ExtResource("6_su788")
+
+[node name="BarrierRedRace3" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(163, 368)
+rotation = -1.5708
+texture = ExtResource("8_snb1r")
+
+[node name="BarrierWhiteRace3" type="Sprite2D" parent="Deco/Barriers"]
+position = Vector2(540, 120)
+texture = ExtResource("6_su788")
+
+[node name="Cones" type="Node" parent="Deco"]
+
+[node name="ConeStraight3" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(-1712, 679)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("29_lgerg")
+
+[node name="ConeStraight4" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(-1713.1299, 174.5)
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("29_lgerg")
+
+[node name="ConeStraight" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(-1418, 655)
+texture = ExtResource("29_lgerg")
+
+[node name="ConeStraight2" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(-1419, 612)
+texture = ExtResource("29_lgerg")
+
+[node name="ConeDown" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(-1417, 571)
+texture = ExtResource("30_w4jxa")
+
+[node name="ConeStraight5" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(198, 607)
+texture = ExtResource("29_lgerg")
+
+[node name="ConeStraight6" type="Sprite2D" parent="Deco/Cones"]
+position = Vector2(148, 654)
+texture = ExtResource("29_lgerg")
+
+[node name="Arrows" type="Node" parent="Deco"]
+
+[node name="ArrowWhite" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(314, -300)
+rotation = 2.03505
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowWhite4" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(776, -133)
+rotation = 2.03505
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowWhite2" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(399, -256)
+rotation = 2.03505
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowWhite3" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(693, -174)
+rotation = 2.03505
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowYellow" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-134, 724)
+rotation = -0.47822
+texture = ExtResource("18_x6q2s")
+
+[node name="ArrowYellow2" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-179, 656)
+rotation = -0.47822
+texture = ExtResource("18_x6q2s")
+
+[node name="ArrowYellow3" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-791, 656)
+rotation = -2.68083
+texture = ExtResource("18_x6q2s")
+
+[node name="ArrowYellow4" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-835, 736)
+rotation = -2.68083
+texture = ExtResource("18_x6q2s")
+
+[node name="ArrowWhite5" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-1399, 433)
+rotation = 1.07687
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowWhite6" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-1356, 412)
+rotation = 1.07687
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_kabwr")
+
+[node name="ArrowWhite7" type="Sprite2D" parent="Deco/Arrows"]
+position = Vector2(-1315, 389)
+rotation = 1.07687
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("17_kabwr")
+
+[node name="rock" type="Node" parent="Deco"]
+
+[node name="Rock3" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(272, 984)
+texture = ExtResource("21_py3d3")
+
+[node name="Rock4" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-125, 984)
+texture = ExtResource("20_wuv32")
+
+[node name="Rock5" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-949, -74)
+texture = ExtResource("20_wuv32")
+
+[node name="Rock6" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-98, -87)
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock7" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(515, 908)
+rotation = -3.11192
+texture = ExtResource("20_wuv32")
+
+[node name="Rock8" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1416, -553)
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock9" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-313, -554)
+texture = ExtResource("20_wuv32")
+
+[node name="Rock1" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(288, 74)
+rotation = 1.5708
+texture = ExtResource("20_wuv32")
+
+[node name="Rock11" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(616, 540)
+rotation = -0.47822
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock2" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1764, 796)
+texture = ExtResource("20_wuv32")
+
+[node name="Rock10" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1366, 979)
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock12" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1078, 613)
+rotation = -1.35263
+texture = ExtResource("21_py3d3")
+
+[node name="Rock13" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1689, -519)
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock14" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(341, -500)
+texture = ExtResource("21_py3d3")
+
+[node name="Rock15" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(1097, 430)
+rotation = 2.03505
+texture = ExtResource("20_wuv32")
+
+[node name="Rock16" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-1271, 541)
+rotation = 1.91463
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock17" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(8, 277)
+texture = ExtResource("19_4iv4x")
+
+[node name="Rock18" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(-41, 411)
+rotation = 0.837758
+texture = ExtResource("20_wuv32")
+
+[node name="Rock19" type="Sprite2D" parent="Deco/rock"]
+position = Vector2(72, 524)
+rotation = -1.1973
+texture = ExtResource("19_4iv4x")
+
+[node name="tribune_tent" type="Node" parent="Deco"]
+
+[node name="TribuneFull" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(782, 691)
+rotation = 2.6337
+texture = ExtResource("25_r7umo")
+
+[node name="TentBlue" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(-1120, 15)
+texture = ExtResource("27_bnvcl")
+
+[node name="TentRed" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(-1120, 331)
+texture = ExtResource("26_6wo3v")
+
+[node name="TribuneFull2" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(860, -410)
+rotation = 0.359538
+texture = ExtResource("25_r7umo")
+
+[node name="TribuneFull3" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(-479, 883)
+rotation = -3.14159
+texture = ExtResource("25_r7umo")
+
+[node name="TribuneOverhangRed" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(858, 826)
+rotation = 2.6337
+texture = ExtResource("24_688ha")
+
+[node name="TentRedLarge" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(-428, 233)
+texture = ExtResource("28_mkk1j")
+
+[node name="TentBlueLarge" type="Sprite2D" parent="Deco/tribune_tent"]
+position = Vector2(-889, 227)
+texture = ExtResource("31_8bt7y")
+
+[node name="trees" type="Node" parent="Deco"]
+
+[node name="TreeLarge" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(73, 16)
+texture = ExtResource("22_q5acf")
+
+[node name="TreeSmall" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(-1741, 931)
+texture = ExtResource("23_bk5a4")
+
+[node name="TreeLarge2" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(-197, 203)
+texture = ExtResource("22_q5acf")
+
+[node name="TreeSmall2" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(-1148, -560)
+texture = ExtResource("23_bk5a4")
+
+[node name="TreeSmall3" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(-70, -554)
+texture = ExtResource("23_bk5a4")
+
+[node name="TreeLarge3" type="Sprite2D" parent="Deco/trees"]
+position = Vector2(1126, 906)
+texture = ExtResource("22_q5acf")
+
+[node name="other" type="Node" parent="Deco"]
+
+[node name="Oil" type="Sprite2D" parent="Deco/other"]
+position = Vector2(-1251, 24)
+texture = ExtResource("32_x5khy")
+
+[node name="SkidmarkLong1" type="Sprite2D" parent="Deco/other"]
+position = Vector2(-1254, 190)
+texture = ExtResource("34_p4oui")
+
+[node name="Lights" type="Sprite2D" parent="Deco/other"]
+z_index = 100
+position = Vector2(-1571, 94)
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("31_cttsb")
+
+[node name="Oil2" type="Sprite2D" parent="Deco/other"]
+position = Vector2(-671, 333)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("32_x5khy")
+
+[node name="Oil3" type="Sprite2D" parent="Deco/other"]
+position = Vector2(-650, 141)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("32_x5khy")
+
+[node name="StartFinish" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StartFinish"]
+position = Vector2(-1448, 97)
+shape = SubResource("RectangleShape2D_d1w86")
+
+[node name="Checkpoint1" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint1"]
+position = Vector2(-1008.25, -353)
+shape = SubResource("RectangleShape2D_snb1r")
+
+[node name="Checkpoint2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint2"]
+position = Vector2(346.5, 494.125)
+shape = SubResource("RectangleShape2D_to08q")
+
+[node name="Checkpoint3" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Checkpoint3"]
+position = Vector2(-1175, 800.5)
+shape = SubResource("RectangleShape2D_0ivfh")
+
+[node name="Barrieren" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-899.375, 536.5)
+shape = SubResource("SegmentShape2D_cq76r")
+debug_color = Color(0.0948944, 0.592821, 0.722094, 0.42)
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-585, 830)
+shape = SubResource("SegmentShape2D_ct4fq")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-47, 665)
+shape = SubResource("SegmentShape2D_06n0d")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-164, 911)
+shape = SubResource("SegmentShape2D_mlkvi")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-1444, 665)
+shape = SubResource("SegmentShape2D_hvhgk")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-1699, 666)
+shape = SubResource("SegmentShape2D_70ppd")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-1444, 344)
+shape = SubResource("SegmentShape2D_3w2mb")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-900, 500)
+shape = SubResource("SegmentShape2D_riqwg")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-1317, 279)
+shape = SubResource("SegmentShape2D_qhs4k")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-676, -351)
+shape = SubResource("SegmentShape2D_2ctmq")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-631, -377)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-584, -391)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-605, -435)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-471, -252)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-522, -255)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-505, -307)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-456, -422)
+shape = SubResource("CircleShape2D_0qlj2")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Barrieren"]
+position = Vector2(-653, -430)
+shape = SubResource("CircleShape2D_0qlj2")

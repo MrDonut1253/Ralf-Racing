@@ -1,10 +1,8 @@
-[gd_scene load_steps=33 format=4 uid="uid://c5koyppnst1he"]
+[gd_scene load_steps=31 format=4 uid="uid://c5koyppnst1he"]
 
 [ext_resource type="Script" uid="uid://dji242haxuoeb" path="res://scripts/game.gd" id="1_36yw3"]
 [ext_resource type="PackedScene" uid="uid://dafxj4beld8w1" path="res://prefabs/camera.tscn" id="1_lmnn2"]
 [ext_resource type="Texture2D" uid="uid://i8r8xpflllhd" path="res://assets/Spritesheets/spritesheet_tiles.png" id="2_36yw3"]
-[ext_resource type="PackedScene" uid="uid://ib3gylia75kr" path="res://prefabs/player1.tscn" id="3_7qcej"]
-[ext_resource type="PackedScene" uid="uid://dvxhyjmvr3abn" path="res://prefabs/player2.tscn" id="4_ogova"]
 [ext_resource type="Texture2D" uid="uid://dq40vomwy4hmx" path="res://assets/PNG/Objects/tires_red.png" id="5_eks20"]
 [ext_resource type="Texture2D" uid="uid://c77kd2ppk6u0i" path="res://assets/PNG/Objects/tires_white.png" id="6_y5bi8"]
 [ext_resource type="Texture2D" uid="uid://dbsg0kcuv120g" path="res://assets/PNG/Objects/tires_white_alt.png" id="7_lbpag"]
@@ -406,10 +404,12 @@ size = Vector2(82, 237)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fh86h"]
 size = Vector2(237, 76)
 
-[node name="Level01" type="Node2D"]
+[node name="Level" type="Node2D"]
 
 [node name="Game" type="Node" parent="."]
 script = ExtResource("1_36yw3")
+
+[node name="GameMode" type="Node" parent="."]
 
 [node name="Camera2D" parent="." instance=ExtResource("1_lmnn2")]
 position = Vector2(-301, 195)
@@ -425,14 +425,6 @@ tile_set = SubResource("TileSet_k1cv0")
 position = Vector2(-36, 0)
 tile_map_data = PackedByteArray("AAD9/wAAAgABAAIAAAD8/wEAAgABAAIAAAD7/wAAAgABAAIAAAD6/wEAAgABAAIAAAD9/wEAAgAEAAoAAAD8/wAAAgAEAAoAAAD7/wEAAgAEAAoAAAD6/wAAAgAEAAoAAAD+/wAAAgAAABEAAAD+/wEAAgAAAA8AAAD//wEAAgADAAoAAAD//wAAAgAFAAoAAAAAAAEAAgACAAQAAAABAAEAAgACAAMAAAABAAAAAgADAAMAAAAAAAAAAgADAAQAAAAAAP//AgAEAAsAAAAAAP7/AgAEAAsAAAABAP//AgAEAAkAAAABAP7/AgAEAAkAAAACAP3/AgADAAoAAAABAP3/AgAEAAUAAAADAP3/AgAEAAQAAAADAP7/AgAEAAsAAAADAP//AgAEAAsAAAAEAP7/AgAEAAkAAAAEAP//AgAEAAkAAAAAAP3/AgAEAAYAAAAAAPz/AgAFAAYAAAAEAP3/AgAEAAMAAAAEAPz/AgAFAAMAAAADAPz/AgAFAAQAAAABAPz/AgAFAAUAAAACAPz/AgAFAAoAAAADAAAAAgAEAAsAAAADAAEAAgAEAAsAAAAEAAAAAgAEAAkAAAAEAAEAAgAEAAkAAAAEAAIAAgAEAAkAAAADAAIAAgAEAAsAAAAEAAMAAgAEAAkAAAAEAAQAAgAEAAkAAAADAAMAAgAEAAsAAAADAAQAAgAEAAsAAAAEAAUAAgADAAMAAAAEAAYAAgACAAMAAAADAAYAAgACAAQAAAADAAUAAgADAAQAAAACAAUAAgAFAAoAAAABAAUAAgAFAAoAAAACAAYAAgADAAoAAAABAAYAAgADAAoAAAAAAAQAAgAEAA4AAAAAAAYAAgACAA4AAAD//wQAAgAEAA8AAAAAAAUAAgADAA4AAAD//wYAAgACAA8AAAD//wUAAgADAA8AAAD+/wQAAgAFAAoAAAD9/wQAAgAFAAoAAAD8/wQAAgAFAAoAAAD7/wQAAgAFAAoAAAD9/wUAAgADAAoAAAD8/wUAAgADAAoAAAD7/wUAAgADAAoAAAD+/wUAAgADAAoAAAD6/wQAAgAEABAAAAD5/wQAAgAEABEAAAD6/wYAAgACABAAAAD6/wUAAgADABAAAAD5/wYAAgACABEAAAD5/wUAAgADABEAAAD4/wYAAgADAAoAAAD3/wYAAgACAAUAAAD2/wYAAgACAAYAAAD2/wUAAgADAAYAAAD2/wQAAgAEAAsAAAD2/wMAAgAEAAsAAAD3/wMAAgAEAAkAAAD3/wQAAgAEAAkAAAD4/wUAAgAFAAoAAAD3/wUAAgADAAUAAAD3/wAAAgAFAAUAAAD2/wEAAgAEAAYAAAD2/wAAAgAFAAYAAAD3/wEAAgAEAAUAAAD3/wIAAgAEAAkAAAD4/wEAAgADAAoAAAD5/wEAAgADAAoAAAD2/wIAAgAEAAsAAAD4/wAAAgAFAAoAAAD5/wAAAgAFAAoAAAA=")
 tile_set = SubResource("TileSet_k1cv0")
-
-[node name="Player1" parent="." instance=ExtResource("3_7qcej")]
-position = Vector2(-358, 65)
-rotation = 1.5708
-
-[node name="Player2" parent="." instance=ExtResource("4_ogova")]
-position = Vector2(-488, 193)
-rotation = 1.5708
 
 [node name="Deco" type="Node" parent="."]
 
@@ -657,6 +649,93 @@ shape = SubResource("RectangleShape2D_hib0i")
 
 [node name="HUD" type="CanvasLayer" parent="."]
 
+[node name="PlayerStatsContainer" type="HBoxContainer" parent="HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 200
+alignment = 1
+
+[node name="PanelP1" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer1" type="Label" parent="HUD/PlayerStatsContainer/PanelP1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0912953, 0.396271, 0.567769, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer1" type="Label" parent="HUD/PlayerStatsContainer/PanelP1"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.0901961, 0.396078, 0.568627, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP2" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer2" type="Label" parent="HUD/PlayerStatsContainer/PanelP2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.697823, 0.307183, 0.0302439, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer2" type="Label" parent="HUD/PlayerStatsContainer/PanelP2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.698039, 0.305882, 0.0313726, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP3" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer3" type="Label" parent="HUD/PlayerStatsContainer/PanelP3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42754015, 0.4034711, 4.813075e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer3" type="Label" parent="HUD/PlayerStatsContainer/PanelP3"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.42754015, 0.4034711, 4.813075e-07, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
+[node name="PanelP4" type="VBoxContainer" parent="HUD/PlayerStatsContainer"]
+layout_mode = 2
+
+[node name="TimerPlayer4" type="Label" parent="HUD/PlayerStatsContainer/PanelP4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(5.1740557e-07, 0.45955557, 0.10556357, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Laptime: "
+
+[node name="RundenPlayer4" type="Label" parent="HUD/PlayerStatsContainer/PanelP4"]
+layout_mode = 2
+theme_override_colors/font_color = Color(5.1740557e-07, 0.45955557, 0.10556357, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("24_7qcej")
+theme_override_font_sizes/font_size = 32
+text = "Completed Laps:"
+
 [node name="CountdownLabel" type="Label" parent="HUD"]
 anchors_preset = 8
 anchor_left = 0.5
@@ -677,59 +756,6 @@ text = "Get Ready...
 "
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="TimerPlayer1" type="Label" parent="HUD"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0.0912953, 0.396271, 0.567769, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("24_7qcej")
-theme_override_font_sizes/font_size = 32
-text = "Laptime: "
-
-[node name="TimerPlayer2" type="Label" parent="HUD"]
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -40.0
-offset_bottom = 35.0
-grow_horizontal = 0
-theme_override_colors/font_color = Color(0.697823, 0.307183, 0.0302439, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("24_7qcej")
-theme_override_font_sizes/font_size = 32
-text = "Laptime: "
-
-[node name="RundenPlayer1" type="Label" parent="HUD"]
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -325.0
-offset_right = 170.0
-offset_bottom = -290.0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.0901961, 0.396078, 0.568627, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("24_7qcej")
-theme_override_font_sizes/font_size = 32
-text = "Completed Laps:"
-
-[node name="RundenPlayer2" type="Label" parent="HUD"]
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -170.0
-offset_top = -325.0
-offset_bottom = -290.0
-grow_horizontal = 0
-grow_vertical = 2
-theme_override_colors/font_color = Color(0.698039, 0.305882, 0.0313726, 1)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_fonts/font = ExtResource("24_7qcej")
-theme_override_font_sizes/font_size = 32
-text = "Completed Laps:"
 
 [node name="StartFinish" type="Area2D" parent="."]
 position = Vector2(-207, 121)
@@ -759,6 +785,30 @@ shape = SubResource("RectangleShape2D_fh86h")
 [node name="audio_start" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("25_o18in")
 volume_db = 2.0
+
+[node name="Players" type="Node2D" parent="."]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="Players"]
+_spawnable_scenes = PackedStringArray("uid://ib3gylia75kr")
+spawn_path = NodePath("..")
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="1" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-358, 65)
+rotation = 1.5707964
+
+[node name="2" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-488, 193)
+rotation = 1.5707964
+
+[node name="3" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-612, 67)
+rotation = 1.5707964
+
+[node name="4" type="Marker2D" parent="SpawnPoints"]
+position = Vector2(-748, 195)
+rotation = 1.5707964
 
 [connection signal="body_entered" from="StartFinish" to="Game" method="on_start_finish_body_entered"]
 [connection signal="body_entered" from="Checkpoint1" to="Game" method="on_checkpoint_1_body_entered"]

@@ -1,131 +1,143 @@
+# game.gd
 extends Node
 
-@onready var countdown_label = get_node("../HUD/CountdownLabel")
-@onready var timer_p1_label = get_node("../HUD/TimerPlayer1")
-@onready var timer_p2_label = get_node("../HUD/TimerPlayer2")
-@onready var runden_p1_label = get_node("../HUD/RundenPlayer1")
-@onready var runden_p2_label = get_node("../HUD/RundenPlayer2")
+const PLAYER_SCENE_PATH := "res://prefabs/player.tscn"
 
-@onready var audio_start = get_node("../audio_start")
-
-var countdown_value = 4
-var timer = 0.0
-var is_counting_down = true
-var start = false
-var countdown_go_timer = 0.0
-var total_laps = 3
-
-var players = {
-	"Player1": {
-		"stopwatch_time": 0.0,
-		"lap_start_time": 0.0,
-		"completed_laps": 0,
-		"lap_times": [],
-		"next_checkpoint": 1,
-		"finish_time": 0.0
-	},
-	"Player2": {
-		"stopwatch_time": 0.0,
-		"lap_start_time": 0.0,
-		"completed_laps": 0,
-		"lap_times": [],
-		"next_checkpoint": 1,
-		"finish_time": 0.0
-	}
+# --- ZUKUNFTS-MUSIK: REGISTRIERUNG DER MODI ---
+# Hier trägst du später neue Modi ein.
+# Key: Ein Enum oder String (kommt vom NetworkManager)
+# Value: Der Pfad zum Skript
+const GAME_MODES = {
+	"RACE": "res://scripts/game_modes/race_mode.gd",
+	# "TAG": "res://scripts/game_modes/tag_mode.gd",
+	# "BATTLE": "res://scripts/game_modes/battle_mode.gd"
 }
 
+# Aktuell gewählter Modus (später via NetworkManager holen)
+var current_mode_key = "RACE" 
+
+# --- REFERENZEN ---
+@onready var players_container = $"../Players"
+@onready var spawner = $"../Players/MultiplayerSpawner"
+@onready var spawn_points_container = $"../SpawnPoints"
+
+# Referenz auf den dynamisch erzeugten Modus
+var active_game_mode_node: Node = null
+
+# --- DATEN ---
+# Diese Variable ist der "Master Switch" für Inputs (player.gd greift hierauf zu)
+var game_started := false 
+var players_loaded_count := 0
+
 func _ready():
-	await get_tree().create_timer(0.55).timeout  # 0.55 Sekunden warten
-	audio_start.play()
+	# 1. DYNAMISCHES ERZEUGEN DES SPIELMODUS
+	_load_and_attach_gamemode()
 
-func _process(delta):
-	if Input.is_action_pressed("exit"):
-		get_tree().change_scene_to_file("res://levels/menu.tscn")
+	# 2. Spawner Setup
+	if spawner:
+		spawner.spawn_path = ".." 
+		spawner.spawn_function = _spawn_player_internal
+
+	# 3. Infrastruktur-Signale
+	players_container.child_entered_tree.connect(_on_player_node_added)
+	players_container.child_exiting_tree.connect(_on_player_node_removed)
+	multiplayer.peer_connected.connect(_on_player_connected)
+	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	
-	if is_counting_down:
-		timer += delta
-		print(timer)
-		if timer >= 1.0:
-			timer -= 1.0
-			countdown_value -= 1
-			if countdown_value > 0:
-				countdown_label.text = str(countdown_value)
-			elif countdown_value == 0:
-				countdown_label.text = "GO!"
-				countdown_go_timer = 2.0
-				is_counting_down = false
-				start = true
-				for name in players:
-					players[name]["lap_start_time"] = 0.0
-	else:
-		if countdown_go_timer > 0.0:
-			countdown_go_timer -= delta
-			if countdown_go_timer <= 0.0:
-				countdown_label.text = ""
+	# 4. Ready-Signal an Host
+	await get_tree().process_frame
+	notify_im_ready.rpc_id(1)
 
-	if start:
-		for name in players:
-			if players[name]["completed_laps"] < total_laps:
-				players[name]["stopwatch_time"] += delta
+func _process(_delta):
+	if Input.is_action_just_pressed("exit"):
+		_return_to_menu()
 
-		var p1_lap_time = players["Player1"]["stopwatch_time"] - players["Player1"]["lap_start_time"]
-		var p2_lap_time = players["Player2"]["stopwatch_time"] - players["Player2"]["lap_start_time"]
-
-		timer_p1_label.text = "Laptime: %.2f s" % p1_lap_time
-		timer_p2_label.text = "Laptime: %.2f s" % p2_lap_time
-		runden_p1_label.text = "Completed Laps: %d / %d" % [players["Player1"]["completed_laps"], total_laps]
-		runden_p2_label.text = "Completed Laps: %d / %d" % [players["Player2"]["completed_laps"], total_laps]
-
-func on_checkpoint_entered(body, checkpoint_num):
-	if not start or not players.has(body.name):
+# --- MODUS FACTORY ---
+func _load_and_attach_gamemode():
+	# In Zukunft: var key = NetworkManager.selected_game_mode
+	var key = current_mode_key 
+	
+	if not GAME_MODES.has(key):
+		push_error("Spielmodus nicht gefunden: " + key)
 		return
 
-	var player = players[body.name]
-	if checkpoint_num == player["next_checkpoint"]:
-		player["next_checkpoint"] += 1
-		print("Checkpoint %d reached by %s" % [checkpoint_num, body.name])
+	var script_path = GAME_MODES[key]
+	var script = load(script_path)
+	
+	# Neuen Node erzeugen
+	var mode_node = Node.new()
+	mode_node.name = "GameMode" # WICHTIG: Damit RPCs den Pfad finden (/root/Level/GameMode)
+	mode_node.set_script(script)
+	
+	# Als GESCHWISTER anhängen (Kind von Level)
+	get_parent().call_deferred("add_child", mode_node)
+	
+	# Referenz speichern
+	active_game_mode_node = mode_node
+	print("Spielmodus geladen: ", key)
 
-func on_start_finish_entered(body):
-	if not start or not players.has(body.name):
-		return
+# --- LOAD SYNC ---
+@rpc("any_peer", "call_local", "reliable")
+func notify_im_ready():
+	if not multiplayer.is_server(): return
+	players_loaded_count += 1
+	var expected = multiplayer.get_peers().size() + 1
+	if players_loaded_count >= expected:
+		_start_game_sequence()
 
-	var player = players[body.name]
-	if player["next_checkpoint"] == 4:
-		var lap_time = player["stopwatch_time"] - player["lap_start_time"]
-		player["lap_times"].append(lap_time)
-		player["lap_start_time"] = player["stopwatch_time"]
-		player["completed_laps"] += 1
-		player["next_checkpoint"] = 1
-		print("%s completed lap %d: %.2f seconds" % [body.name, player["completed_laps"], lap_time])
-
-		if player["completed_laps"] == total_laps:
-			player["finish_time"] = player["stopwatch_time"]
-			print("%s finished! Total time: %.2f seconds" % [body.name, player["finish_time"]])
-			if players["Player1"]["completed_laps"] >= total_laps and players["Player2"]["completed_laps"] >= total_laps:
-				_game_over()
-
-func _game_over():
-	start = false
-	var t1 = players["Player1"]["finish_time"]
-	var t2 = players["Player2"]["finish_time"]
-	var winner_text = ""
-	if t1 < t2:
-		winner_text = "Blue car wins! (%.2f s vs %.2f s)" % [t1, t2]
-	elif t2 < t1:
-		winner_text = "Red car wins! (%.2f s vs %.2f s)" % [t2, t1]
+func _start_game_sequence():
+	# A) Spieler spawnen (Aufgabe der Infrastruktur)
+	spawner.spawn([1, 0]) 
+	var index = 1
+	for id in multiplayer.get_peers():
+		spawner.spawn([id, index])
+		index += 1
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	# B) Spielmodus starten
+	# Wir rufen die Funktion auf dem dynamischen Node auf
+	if active_game_mode_node:
+		# RPC Aufruf auf dem neuen Node
+		active_game_mode_node.rpc("start_match")
 	else:
-		winner_text = "Tie! (%.2f s)" % t1
-	countdown_label.text = "Game Over\n" + winner_text + "\nPress escape to exit"
+		print("FEHLER: Kein GameMode aktiv!")
 
+# --- SPAWN ---
+func _spawn_player_internal(data):
+	var id = data[0]
+	var idx = data[1]
+	var p = load(PLAYER_SCENE_PATH).instantiate()
+	p.name = str(id)
+	p.player_index = idx
+	
+	var spawns = []
+	if spawn_points_container: spawns = spawn_points_container.get_children()
+	
+	if idx < spawns.size():
+		p.position = spawns[idx].position
+		p.rotation = spawns[idx].rotation
+	else:
+		p.position = Vector2.ZERO
+		
+	p.z_index = 10
+	return p
 
-func on_start_finish_body_entered(body: Node2D) -> void:
-	on_start_finish_entered(body)
+# --- EVENT WEITERLEITUNG ---
+# Da der GameMode erst später entsteht, leiten wir Events weiter
+func _on_player_node_added(node):
+	if active_game_mode_node and active_game_mode_node.has_method("on_player_spawned"):
+		active_game_mode_node.on_player_spawned(node)
 
-func on_checkpoint_1_body_entered(body: Node2D) -> void:
-	on_checkpoint_entered(body, 1)
+func _on_player_node_removed(node):
+	if active_game_mode_node and active_game_mode_node.has_method("on_player_despawned"):
+		active_game_mode_node.on_player_despawned(node)
 
-func on_checkpoint_2_body_entered(body: Node2D) -> void:
-	on_checkpoint_entered(body, 2)
+func _return_to_menu():
+	NetworkManager.reset_network()
+	get_tree().change_scene_to_file("res://levels/menu.tscn")
 
-func on_checkpoint_3_body_entered(body: Node2D) -> void:
-	on_checkpoint_entered(body, 3)
+func _on_player_connected(_id): pass
+func _on_player_disconnected(id): 
+	if players_container.has_node(str(id)): 
+		players_container.get_node(str(id)).queue_free()

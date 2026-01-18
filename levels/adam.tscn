@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://dafxj4beld8w1" path="res://prefabs/camera.tscn" id="1_od0tk"]
 [ext_resource type="Texture2D" uid="uid://i8r8xpflllhd" path="res://assets/Spritesheets/spritesheet_tiles.png" id="2_7e4fn"]
-[ext_resource type="PackedScene" uid="uid://ib3gylia75kr" path="res://prefabs/player1.tscn" id="3_ohefs"]
+[ext_resource type="PackedScene" uid="uid://ib3gylia75kr" path="res://prefabs/player.tscn" id="3_ohefs"]
 [ext_resource type="PackedScene" uid="uid://dvxhyjmvr3abn" path="res://prefabs/player2.tscn" id="4_7emoc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_07r32"]
