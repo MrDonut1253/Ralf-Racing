@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://ib3gylia75kr"]
 
 [ext_resource type="Script" uid="uid://vl3nfiyrq7dm" path="res://scripts/player.gd" id="1_weyph"]
-[ext_resource type="Texture2D" uid="uid://ivyow4ftck5m" path="res://assets/PNG/Cars/car_blue_3.png" id="2_weyph"]
+[ext_resource type="Texture2D" uid="uid://dj5hkdb1b4tw8" path="res://assets/PNG/Cars/car_blue_1.png" id="2_weyph"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_weyph"]
 radius = 32.0

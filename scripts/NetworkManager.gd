@@ -1,10 +1,9 @@
-#networkmanager.gd
 extends Node
 
 const TubeClientClass = preload("res://addons/tube/tube_client.gd")
 const TubeContextClass = preload("res://addons/tube/tube_context.gd")
 
-# --- SIGNALE ---
+# --- SIGNALE (Wie 0.4) ---
 signal status_update(message)
 signal ping_updated(value_ms)
 signal lobby_updated        
@@ -13,45 +12,25 @@ signal lobby_state_changed
 # --- DATEN ---
 var players = {}
 var current_tube_session = null
-
-# Ping Variablen
 var ping_timer := 0.0
 const PING_INTERVAL := 1.0
 
-# SPIELER DATEN
 var my_local_name: String = "Player"
 var current_lobby_code: String = ""
 var current_map_index = 0
 
-# Maps Liste
+# Deine Maps aus 0.5 (behalten wir, das sind nur Daten)
 var maps = [
-	{
-		"name": "Rapid Raceway",
-		"scene_path": "res://levels/level01.tscn",
-		"preview_path": "res://assets/PNG/level01.png"
-	},
-	{
-		"name": "Crazy Ciruit",
-		"scene_path": "res://levels/level02.tscn",
-		"preview_path": "res://assets/PNG/level02.png"
-	},
-	{
-		"name": "Speedy Strip",
-		"scene_path": "res://levels/level03.tscn",
-		"preview_path": "res://assets/PNG/level03.png"
-	},
-	{
-		"name": "Turbo Track",
-		"scene_path": "res://levels/level04.tscn",
-		"preview_path": "res://assets/PNG/level04.png"
-	}
+	{ "name": "Rapid Raceway", "scene_path": "res://levels/level01.tscn", "preview_path": "res://assets/PNG/level01.png" },
+	{ "name": "Crazy Ciruit", "scene_path": "res://levels/level02.tscn", "preview_path": "res://assets/PNG/level02.png" },
+	{ "name": "Speedy Strip", "scene_path": "res://levels/level03.tscn", "preview_path": "res://assets/PNG/level03.png" },
+	{ "name": "Turbo Track", "scene_path": "res://levels/level04.tscn", "preview_path": "res://assets/PNG/level04.png" }
 ]
 
-const MY_APP_ID = "ralf_racing_001" 
+const MY_APP_ID = "ralf_racing_fix" # Neue ID für frischen Start
 
 func _ready():
 	set_process(true)
-	# Wenn der Server weg ist (Absturz etc.), müssen alle Clients raus
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 func _process(delta):
@@ -64,27 +43,23 @@ func _process(delta):
 		ping_timer = 0.0
 		request_ping()
 
-# --- DISCONNECT HANDLER (Ungeplant) ---
+# --- DISCONNECT LOGIK (0.4) ---
 func _on_server_disconnected():
-	print("Verbindung verloren.")
 	reset_network()
-	status_update.emit("Verbindung zum Host verloren.")
+	status_update.emit("Verbindung verloren.")
 	get_tree().change_scene_to_file.call_deferred("res://levels/menu.tscn")
 
-# --- DISCONNECT HANDLER (Geplant vom Host) ---
 @rpc("authority", "call_remote", "reliable")
 func kicked_by_host():
-	print("Host hat die Lobby geschlossen.")
 	reset_network()
-	status_update.emit("Host hat die Lobby geschlossen.")
+	status_update.emit("Host hat Lobby geschlossen.")
 	get_tree().change_scene_to_file("res://levels/menu.tscn")
 
-# --- RESET (Öffentlich) ---
 func reset_network():
 	_reset_session()
 	status_update.emit("Netzwerk zurückgesetzt.")
 
-# --- HOSTING ---
+# --- HOSTING (Logik 0.4) ---
 func host_game():
 	_reset_session()
 	status_update.emit("Starte Host...")
@@ -95,6 +70,7 @@ func host_game():
 	tube.create_session()
 	_fix_signals()
 	
+	# Warten wie in 0.4 (stabil)
 	await tube.session_created
 	
 	var key = tube.session_id
@@ -105,7 +81,7 @@ func host_game():
 		return key
 	return null
 
-# --- JOINING (CODE) ---
+# --- JOINING (Logik 0.4) ---
 func join_game(code):
 	_reset_session()
 	status_update.emit("Verbinde...")
@@ -125,14 +101,11 @@ func join_game(code):
 	send_player_info.rpc(my_local_name)
 	get_tree().change_scene_to_file("res://levels/lobby.tscn")
 
-# --- INTERNE HELFER ---
+# --- HELFER ---
 func _fix_signals():
 	var mp = get_tree().get_multiplayer()
-	if mp.peer_connected.is_connected(_on_player_connected):
-		mp.peer_connected.disconnect(_on_player_connected)
-	if mp.peer_disconnected.is_connected(_on_player_disconnected):
-		mp.peer_disconnected.disconnect(_on_player_disconnected)
-	
+	if mp.peer_connected.is_connected(_on_player_connected): mp.peer_connected.disconnect(_on_player_connected)
+	if mp.peer_disconnected.is_connected(_on_player_disconnected): mp.peer_disconnected.disconnect(_on_player_disconnected)
 	mp.peer_connected.connect(_on_player_connected)
 	mp.peer_disconnected.connect(_on_player_disconnected)
 
@@ -143,6 +116,7 @@ func _create_tube():
 	context.app_id = MY_APP_ID
 	context.session_id_characters_set = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 	
+	# LISTE UPDATE (Wichtig für Connectivity, aber Struktur 0.4)
 	var my_stun: Array[String] = [
 		"stun:stun.l.google.com:19302",
 		"stun:stun1.l.google.com:19302",
@@ -153,12 +127,13 @@ func _create_tube():
 	var my_trackers: Array[String] = [
 		"wss://tracker.webtorrent.dev",
 		"wss://tracker.openwebtorrent.com",
-        "wss://tracker.files.fm:7073/announce"
+		"wss://tracker.files.fm:7073/announce",
+		"wss://tracker.btorrent.xyz",
+        "wss://tracker.sloppyta.co:443/"
 	]
 	context.trackers_urls = my_trackers
 	
 	if not context.is_valid():
-		print("FEHLER: Context ist invalid")
 		return null
 
 	tube.context = context
@@ -167,28 +142,20 @@ func _create_tube():
 	return tube
 
 func _reset_session():
-	# Session zerstören
 	if current_tube_session: 
 		current_tube_session.queue_free()
 		current_tube_session = null
-		
-	# Multiplayer Peer nullen
 	if get_tree().get_multiplayer().has_multiplayer_peer():
 		get_tree().get_multiplayer().multiplayer_peer = null
-		
 	players.clear()
 	current_lobby_code = ""
 
 # --- EVENT HANDLER ---
 func _on_player_connected(id):
 	add_player(id)
-	status_update.emit("Spieler " + str(id) + " verbunden")
-	
 	send_player_info.rpc_id(id, my_local_name)
-	
 	if multiplayer.is_server():
 		sync_lobby_state.rpc_id(id, current_map_index)
-	
 	lobby_updated.emit()
 
 func _on_player_disconnected(id):
@@ -200,10 +167,9 @@ func add_player(id):
 		players[id] = { "name": "Racer " + str(id) }
 		lobby_updated.emit()
 
-# --- RPCs ---
+# --- RPCs (Standard 0.4) ---
 func request_ping():
-	var time_now = Time.get_ticks_msec()
-	_server_receive_ping.rpc_id(1, time_now)
+	_server_receive_ping.rpc_id(1, Time.get_ticks_msec())
 
 @rpc("any_peer", "call_remote", "unreliable")
 func _server_receive_ping(client_time):
@@ -212,8 +178,7 @@ func _server_receive_ping(client_time):
 
 @rpc("authority", "call_remote", "unreliable")
 func _client_receive_pong(client_time):
-	var rtt = Time.get_ticks_msec() - client_time
-	ping_updated.emit(rtt)
+	ping_updated.emit(Time.get_ticks_msec() - client_time)
 
 @rpc("any_peer", "call_local", "reliable")
 func send_player_info(name_str):
@@ -230,16 +195,8 @@ func sync_lobby_state(new_index):
 @rpc("call_local", "reliable")
 func start_game():
 	var map_data = maps[current_map_index]
-	var path = map_data["scene_path"]
-	print("Starte Spiel auf Map: ", map_data["name"])
-	get_tree().change_scene_to_file(path)
-	
-
+	get_tree().change_scene_to_file(map_data["scene_path"])
 
 @rpc("any_peer", "call_local", "reliable")
 func return_to_lobby():
-	# Wir setzen den Status zurück, damit man in der Lobby wieder "Bereit" drücken kann
-	# (Optional, je nachdem wie deine Lobby funktioniert)
-	
-	# Szene wechseln
 	get_tree().change_scene_to_file("res://levels/lobby.tscn")

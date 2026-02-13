@@ -1,82 +1,74 @@
-# game.gd
 extends Node
 
 const PLAYER_SCENE_PATH := "res://prefabs/player.tscn"
 
-# --- ZUKUNFTS-MUSIK: REGISTRIERUNG DER MODI ---
-# Hier trägst du später neue Modi ein.
-# Key: Ein Enum oder String (kommt vom NetworkManager)
-# Value: Der Pfad zum Skript
-const GAME_MODES = {
-	"RACE": "res://scripts/game_modes/race_mode.gd",
-	# "TAG": "res://scripts/game_modes/tag_mode.gd",
-	# "BATTLE": "res://scripts/game_modes/battle_mode.gd"
-}
-
-# Aktuell gewählter Modus (später via NetworkManager holen)
-var current_mode_key = "RACE" 
+# Wir laden den Race-Mode nur als "Helper" für Rundenzeiten, nicht als Netzwerk-Controller
+const RACE_LOGIC_SCRIPT = "res://scripts/game_modes/race_mode.gd"
 
 # --- REFERENZEN ---
 @onready var players_container = $"../Players"
 @onready var spawner = $"../Players/MultiplayerSpawner"
 @onready var spawn_points_container = $"../SpawnPoints"
-
-# Referenz auf den dynamisch erzeugten Modus
-var active_game_mode_node: Node = null
+# UI Referenzen direkt hier holen, wie in 0.4
+@onready var countdown_label = $"../HUD/CountdownLabel"
+@onready var audio_start = $"../audio_start"
 
 # --- DATEN ---
-# Diese Variable ist der "Master Switch" für Inputs (player.gd greift hierauf zu)
+# Diese Variable steuert, ob gefahren werden darf. 
+# Da sie in game.gd ist, finden Host und Client sie immer!
 var game_started := false 
 var players_loaded_count := 0
 
-func _ready():
-	# 1. DYNAMISCHES ERZEUGEN DES SPIELMODUS
-	_load_and_attach_gamemode()
+# Countdown
+var countdown_value := 4
+var countdown_timer := 0.0
 
-	# 2. Spawner Setup
+# Logik-Helfer
+var race_logic_node: Node = null
+
+func _ready():
+	# 1. Infrastruktur
 	if spawner:
 		spawner.spawn_path = ".." 
 		spawner.spawn_function = _spawn_player_internal
 
-	# 3. Infrastruktur-Signale
 	players_container.child_entered_tree.connect(_on_player_node_added)
 	players_container.child_exiting_tree.connect(_on_player_node_removed)
 	multiplayer.peer_connected.connect(_on_player_connected)
 	multiplayer.peer_disconnected.connect(_on_player_disconnected)
 	
-	# 4. Ready-Signal an Host
+	# 2. Race Logic lokal laden (kein Networking, nur Rechnen)
+	_attach_race_logic()
+	
+	# 3. Ready Signal senden
 	await get_tree().process_frame
 	notify_im_ready.rpc_id(1)
+	
+	# Prozess aus, bis Countdown startet
+	set_process(false)
 
-func _process(_delta):
+func _process(delta):
 	if Input.is_action_just_pressed("exit"):
 		_return_to_menu()
+		
+	# Countdown Management (Exakt wie in 0.4)
+	if not game_started and countdown_value > 0:
+		countdown_timer += delta
+		if countdown_timer >= 1.0:
+			countdown_timer = 0.0
+			countdown_value -= 1
+			_update_countdown_ui()
 
-# --- MODUS FACTORY ---
-func _load_and_attach_gamemode():
-	# In Zukunft: var key = NetworkManager.selected_game_mode
-	var key = current_mode_key 
-	
-	if not GAME_MODES.has(key):
-		push_error("Spielmodus nicht gefunden: " + key)
-		return
+# --- INITIALISIERUNG ---
+func _attach_race_logic():
+	var script = load(RACE_LOGIC_SCRIPT)
+	var logic_node = Node.new()
+	logic_node.name = "RaceLogic"
+	logic_node.set_script(script)
+	add_child(logic_node) # Als Kind von Game
+	race_logic_node = logic_node
 
-	var script_path = GAME_MODES[key]
-	var script = load(script_path)
-	
-	# Neuen Node erzeugen
-	var mode_node = Node.new()
-	mode_node.name = "GameMode" # WICHTIG: Damit RPCs den Pfad finden (/root/Level/GameMode)
-	mode_node.set_script(script)
-	
-	# Als GESCHWISTER anhängen (Kind von Level)
-	get_parent().call_deferred("add_child", mode_node)
-	
-	# Referenz speichern
-	active_game_mode_node = mode_node
-	print("Spielmodus geladen: ", key)
-
-# --- LOAD SYNC ---
+# --- SYNC & START (0.4 Style) ---
 @rpc("any_peer", "call_local", "reliable")
 func notify_im_ready():
 	if not multiplayer.is_server(): return
@@ -86,22 +78,43 @@ func notify_im_ready():
 		_start_game_sequence()
 
 func _start_game_sequence():
-	# A) Spieler spawnen (Aufgabe der Infrastruktur)
+	# 1. Spawnen
 	spawner.spawn([1, 0]) 
 	var index = 1
 	for id in multiplayer.get_peers():
 		spawner.spawn([id, index])
 		index += 1
 	
+	# 2. Warten (damit Clients Zeit haben Autos zu instanziieren)
 	await get_tree().create_timer(1.0).timeout
 	
-	# B) Spielmodus starten
-	# Wir rufen die Funktion auf dem dynamischen Node auf
-	if active_game_mode_node:
-		# RPC Aufruf auf dem neuen Node
-		active_game_mode_node.rpc("start_match")
+	# 3. RPC an ALLE: "Startet den Countdown!"
+	start_countdown_sequence.rpc()
+
+@rpc("call_local", "reliable")
+func start_countdown_sequence():
+	print("Countdown beginnt!")
+	countdown_value = 4
+	countdown_timer = 0.0
+	if audio_start: audio_start.play()
+	set_process(true) # Aktiviert _process für den Countdown
+	
+	# Info an Logik-Script weitergeben
+	if race_logic_node and race_logic_node.has_method("reset_match"):
+		race_logic_node.reset_match()
+
+func _update_countdown_ui():
+	if not countdown_label: return
+	
+	if countdown_value > 0:
+		countdown_label.text = str(countdown_value)
 	else:
-		print("FEHLER: Kein GameMode aktiv!")
+		countdown_label.text = "GO!"
+		# HIER IST DER SCHLÜSSEL: Variable setzen
+		game_started = true
+		
+		# Label später löschen
+		get_tree().create_timer(1.0).timeout.connect(func(): if countdown_label: countdown_label.text = "")
 
 # --- SPAWN ---
 func _spawn_player_internal(data):
@@ -119,19 +132,15 @@ func _spawn_player_internal(data):
 		p.rotation = spawns[idx].rotation
 	else:
 		p.position = Vector2.ZERO
-		
 	p.z_index = 10
 	return p
 
-# --- EVENT WEITERLEITUNG ---
-# Da der GameMode erst später entsteht, leiten wir Events weiter
+# --- WEITERLEITUNG AN LOGIK ---
 func _on_player_node_added(node):
-	if active_game_mode_node and active_game_mode_node.has_method("on_player_spawned"):
-		active_game_mode_node.on_player_spawned(node)
+	if race_logic_node: race_logic_node.on_player_spawned(node)
 
 func _on_player_node_removed(node):
-	if active_game_mode_node and active_game_mode_node.has_method("on_player_despawned"):
-		active_game_mode_node.on_player_despawned(node)
+	if race_logic_node: race_logic_node.on_player_despawned(node)
 
 func _return_to_menu():
 	NetworkManager.reset_network()

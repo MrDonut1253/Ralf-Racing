@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=4 uid="uid://bdj45ulr0otsr"]
+[gd_scene load_steps=43 format=4 uid="uid://bdj45ulr0otsr"]
 
 [ext_resource type="PackedScene" uid="uid://dafxj4beld8w1" path="res://prefabs/camera.tscn" id="2_f0dy5"]
 [ext_resource type="Script" uid="uid://dji242haxuoeb" path="res://scripts/game.gd" id="2_l58l7"]
@@ -418,6 +418,8 @@ size = Vector2(225, 49)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_65fql"]
 size = Vector2(144, 235.5)
+
+[sub_resource type="Curve2D" id="Curve2D_f0dy5"]
 
 [node name="Level" type="Node2D"]
 
@@ -990,3 +992,6 @@ text = "Get Ready...
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_f0dy5")

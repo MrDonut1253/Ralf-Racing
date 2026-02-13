@@ -84,7 +84,7 @@ theme_override_font_sizes/font_size = 50
 theme_override_styles/normal = ExtResource("4_tbhb4")
 theme_override_styles/read_only = ExtResource("4_bvm7p")
 theme_override_styles/focus = ExtResource("4_tbhb4")
-placeholder_text = "Enter IP"
+placeholder_text = "Enter Code"
 alignment = 1
 
 [node name="Join" type="Button" parent="Buttons"]
