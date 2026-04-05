@@ -27,6 +27,8 @@ var countdown_timer := 0.0
 var race_logic_node: Node = null
 
 func _ready():
+	add_to_group("game_controller")
+
 	# 1. Infrastruktur
 	if spawner:
 		spawner.spawn_path = ".." 
@@ -40,10 +42,11 @@ func _ready():
 	# 2. Race Logic lokal laden (kein Networking, nur Rechnen)
 	_attach_race_logic()
 	
-	# 3. Ready Signal senden
-	await get_tree().process_frame
-	notify_im_ready.rpc_id(1)
-	
+	# 3. Ready Signal senden - warten bis Verbindung steht
+	await get_tree().create_timer(0.5).timeout
+	if multiplayer.has_multiplayer_peer() and multiplayer.multiplayer_peer.get_connection_status() == MultiplayerPeer.CONNECTION_CONNECTED:
+		notify_im_ready.rpc_id(1)
+
 	# Prozess aus, bis Countdown startet
 	set_process(false)
 
@@ -73,7 +76,8 @@ func _attach_race_logic():
 func notify_im_ready():
 	if not multiplayer.is_server(): return
 	players_loaded_count += 1
-	var expected = multiplayer.get_peers().size() + 1
+	# Peers + Host = erwartete Spieler; clamp um Race Condition abzufangen
+	var expected = max(multiplayer.get_peers().size() + 1, 1)
 	if players_loaded_count >= expected:
 		_start_game_sequence()
 
@@ -91,9 +95,8 @@ func _start_game_sequence():
 	# 3. RPC an ALLE: "Startet den Countdown!"
 	start_countdown_sequence.rpc()
 
-@rpc("call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func start_countdown_sequence():
-	print("Countdown beginnt!")
 	countdown_value = 4
 	countdown_timer = 0.0
 	if audio_start: audio_start.play()
@@ -147,6 +150,8 @@ func _return_to_menu():
 	get_tree().change_scene_to_file("res://levels/menu.tscn")
 
 func _on_player_connected(_id): pass
-func _on_player_disconnected(id): 
-	if players_container.has_node(str(id)): 
+func _on_player_disconnected(id):
+	if players_loaded_count > 0:
+		players_loaded_count -= 1
+	if players_container.has_node(str(id)):
 		players_container.get_node(str(id)).queue_free()

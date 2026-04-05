@@ -9,14 +9,17 @@ func _process(_delta: float) -> void:
 	if Input.is_action_pressed("exit"):
 		get_tree().change_scene_to_file("res://levels/menu.tscn")
 
+func _load_level(level_number: int) -> void:
+	get_tree().change_scene_to_file("res://levels/level%02d.tscn" % level_number)
+
 func on_level_01_button_down() -> void:
-	get_tree().change_scene_to_file("res://levels/level01.tscn")
+	_load_level(1)
 
 func on_level_02_button_down() -> void:
-	get_tree().change_scene_to_file("res://levels/level02.tscn")
+	_load_level(2)
 
 func on_level_03_button_down() -> void:
-	get_tree().change_scene_to_file("res://levels/level03.tscn")
+	_load_level(3)
 
 func on_level_04_button_down() -> void:
-	get_tree().change_scene_to_file("res://levels/level04.tscn")
+	_load_level(4)

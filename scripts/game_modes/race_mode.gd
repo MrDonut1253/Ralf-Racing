@@ -1,24 +1,27 @@
 extends Node
 
 const TOTAL_LAPS := 3
+const HUD_UPDATE_INTERVAL := 0.1
 
 # Referenzen
 var game_node: Node
 var hud_container: Node
 var players_data: Dictionary = {}
+var total_checkpoints: int = 0
+var hud_update_timer: float = 0.0
 
 func _ready():
 	game_node = get_parent()
-	
+
 	# HUD finden
-	var level = game_node.get_parent() 
+	var level = game_node.get_parent()
 	if level:
 		var hud = level.get_node_or_null("HUD")
 		if hud:
 			hud_container = hud.get_node_or_null("PlayerStatsContainer")
 
-		_connect_checkpoints(level)
-	
+		total_checkpoints = _connect_checkpoints(level)
+
 	_update_hud_visibility()
 	set_process(true)
 
@@ -29,24 +32,31 @@ func reset_match():
 
 func _process(delta):
 	if not game_node or not game_node.game_started: return
-	
+
 	for id in players_data:
 		var p = players_data[id]
 		if p and not p.get("finished", false):
 			p["stopwatch_time"] += delta
-			
-	update_hud()
+
+	# HUD nur alle 0.1s aktualisieren statt jeden Frame
+	hud_update_timer += delta
+	if hud_update_timer >= HUD_UPDATE_INTERVAL:
+		hud_update_timer = 0.0
+		update_hud()
 
 # --- MAP LOGIK ---
-func _connect_checkpoints(level_node):
+func _connect_checkpoints(level_node) -> int:
+	var checkpoint_count := 0
 	for child in level_node.get_children():
 		if child.name.begins_with("Checkpoint"):
 			if not child.body_entered.is_connected(on_checkpoint_entered):
 				var num = child.name.replace("Checkpoint", "").to_int()
 				child.body_entered.connect(on_checkpoint_entered.bind(num))
+				checkpoint_count += 1
 		elif child.name == "StartFinish":
 			if not child.body_entered.is_connected(on_start_finish_entered):
 				child.body_entered.connect(on_start_finish_entered)
+	return checkpoint_count
 
 func on_checkpoint_entered(body, checkpoint_num):
 	if not game_node.game_started: return
@@ -57,7 +67,8 @@ func on_checkpoint_entered(body, checkpoint_num):
 func on_start_finish_entered(body):
 	if not game_node.game_started: return
 	var p = players_data.get(body.name)
-	if p and p["next_checkpoint"] == 4:
+	# Dynamisch: alle Checkpoints müssen passiert sein (nicht hardcoded 4)
+	if p and p["next_checkpoint"] == total_checkpoints + 1:
 		var lap_time = p["stopwatch_time"] - p["lap_start_time"]
 		p["lap_times"].append(lap_time)
 		p["lap_start_time"] = p["stopwatch_time"]
@@ -135,15 +146,16 @@ func _update_hud_visibility():
 # --- HUD UPDATE (MIT NAMEN!) ---
 func update_hud():
 	if not hud_container: return
-	for i in range(4): 
+	# Index-Lookup einmal aufbauen statt O(n) pro Panel
+	var index_to_id := {}
+	for id in players_data:
+		index_to_id[players_data[id]["index"]] = id
+
+	for i in range(4):
 		var panel = hud_container.get_node_or_null("PanelP" + str(i + 1))
 		if not panel: continue
-		
-		var active_id = null
-		for id in players_data:
-			if players_data[id]["index"] == i:
-				active_id = id
-				break
+
+		var active_id = index_to_id.get(i)
 		
 		if active_id:
 			panel.visible = true

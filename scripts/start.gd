@@ -48,12 +48,23 @@ func on_join_pressed() -> void:
 	if code == "":
 		if status_label: status_label.text = "Code fehlt!"
 		return
-	
+
 	_set_ui_disabled(true)
 	_save_name()
+
+	# Timeout: Falls Join nach 10 Sekunden nicht klappt, UI wieder freigeben
+	var timeout_timer = get_tree().create_timer(10.0)
+	var join_completed := false
+	timeout_timer.timeout.connect(func():
+		if not join_completed:
+			join_completed = true
+			_set_ui_disabled(false)
+			if status_label: status_label.text = "Verbindung fehlgeschlagen. Versuche es erneut."
+			NetworkManager.reset_network()
+	)
+
 	await NetworkManager.join_game(code)
-	# Wenn Join fehlschlägt, bleiben Buttons disabled (wie in 0.4) -> App neu starten
-	# Das ist crude, aber war stabil in 0.4
+	join_completed = true
 
 func on_exit_button_pressed() -> void:
 	NetworkManager.reset_network()

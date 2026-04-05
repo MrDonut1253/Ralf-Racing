@@ -41,20 +41,29 @@ func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 
 func _ready():
-	game_node = get_tree().root.find_child("Game", true, false)
+	# Group-basierte Suche ist robuster als find_child
+	var game_nodes = get_tree().get_nodes_in_group("game_controller")
+	game_node = game_nodes[0] if game_nodes.size() > 0 else null
 	if sprite:
 		match player_index % 4:
 			0: sprite.texture = TEX_BLUE
 			1: sprite.texture = TEX_RED
 			2: sprite.texture = TEX_YELLOW
 			3: sprite.texture = TEX_GREEN
-			_: sprite.texture = TEX_BLUE
 	server_position = position
 	server_rotation = rotation
 
-func _process(delta):
+func _physics_process(delta):
 	if not multiplayer.has_multiplayer_peer() or multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
 		return
+
+	# Knockback Physik (immer berechnen)
+	if knockback_velocity.length() > 5.0:
+		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, KNOCKBACK_DECAY * delta)
+	else:
+		knockback_velocity = Vector2.ZERO
+
+	# Netzwerk-Interpolation für Remote-Spieler (in _physics_process für Konsistenz)
 	if not is_multiplayer_authority():
 		if position.distance_to(server_position) > 200.0:
 			position = server_position
@@ -62,18 +71,7 @@ func _process(delta):
 		else:
 			position = position.lerp(server_position, delta * INTERPOLATION_SPEED)
 			rotation = lerp_angle(rotation, server_rotation, delta * INTERPOLATION_SPEED)
-
-func _physics_process(delta):
-	if not multiplayer.has_multiplayer_peer() or multiplayer.multiplayer_peer.get_connection_status() != MultiplayerPeer.CONNECTION_CONNECTED:
 		return
-	
-	# Knockback Physik (immer berechnen)
-	if knockback_velocity.length() > 5.0:
-		knockback_velocity = knockback_velocity.lerp(Vector2.ZERO, KNOCKBACK_DECAY * delta)
-	else:
-		knockback_velocity = Vector2.ZERO
-
-	if not is_multiplayer_authority(): return
 
 	# --- WICHTIG: START-BLOCKER (0.4 LOGIK) ---
 	# Hier prüfen wir direkt beim Game Node. Da Game Node in 0.4 Logik immer da ist,
@@ -128,9 +126,13 @@ func _handle_collisions():
 			var push_dir = -collision.get_normal()
 			var impact = clamp(abs(current_speed), 0.0, max_speed) / max_speed
 			var force = impact * RAM_FORCE
-			collider.apply_impulse.rpc(push_dir * force)
+			# Gezielt nur an den betroffenen Spieler senden statt Broadcast
+			var target_id = collider.name.to_int()
+			if target_id != multiplayer.get_unique_id():
+				collider.apply_impulse.rpc_id(target_id, push_dir * force)
+			collider.apply_impulse(push_dir * force)
 			knockback_velocity += collision.get_normal() * (force * 0.2)
-			current_speed *= 0.85 
+			current_speed *= 0.85
 		else:
 			current_speed *= collision_speed_loss
 			collision_timer = collision_recovery_time

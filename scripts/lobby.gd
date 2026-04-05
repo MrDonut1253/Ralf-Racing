@@ -13,12 +13,12 @@ extends Control
 
 func _ready():
 	_update_ui()
-	
+
 	if not NetworkManager.lobby_state_changed.is_connected(_update_ui):
 		NetworkManager.lobby_state_changed.connect(_update_ui)
 	if not NetworkManager.lobby_updated.is_connected(_on_lobby_updated):
 		NetworkManager.lobby_updated.connect(_on_lobby_updated)
-	
+
 	if exit_button and not exit_button.pressed.is_connected(on_exit_button_pressed):
 		exit_button.pressed.connect(on_exit_button_pressed)
 	if prev_btn and not prev_btn.pressed.is_connected(_on_prev_button_pressed):
@@ -27,14 +27,14 @@ func _ready():
 		next_btn.pressed.connect(_on_next_button_pressed)
 	if start_button and not start_button.pressed.is_connected(_on_start_button_pressed):
 		start_button.pressed.connect(_on_start_button_pressed)
-	
+
 	if code_label:
 		if NetworkManager.current_lobby_code != "":
 			code_label.text = "LOBBY CODE: " + NetworkManager.current_lobby_code
 		else:
 			code_label.text = "Warte auf Code..."
 
-func _process(_delta):
+	# Host-UI einmalig setzen statt jeden Frame
 	var is_host = multiplayer.is_server()
 	if start_button: start_button.visible = is_host
 	if prev_btn: prev_btn.visible = is_host

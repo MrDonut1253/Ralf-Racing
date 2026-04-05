@@ -22,7 +22,7 @@ var current_map_index = 0
 # Deine Maps aus 0.5 (behalten wir, das sind nur Daten)
 var maps = [
 	{ "name": "Rapid Raceway", "scene_path": "res://levels/level01.tscn", "preview_path": "res://assets/PNG/level01.png" },
-	{ "name": "Crazy Ciruit", "scene_path": "res://levels/level02.tscn", "preview_path": "res://assets/PNG/level02.png" },
+	{ "name": "Crazy Circuit", "scene_path": "res://levels/level02.tscn", "preview_path": "res://assets/PNG/level02.png" },
 	{ "name": "Speedy Strip", "scene_path": "res://levels/level03.tscn", "preview_path": "res://assets/PNG/level03.png" },
 	{ "name": "Turbo Track", "scene_path": "res://levels/level04.tscn", "preview_path": "res://assets/PNG/level04.png" }
 ]
@@ -183,20 +183,31 @@ func _client_receive_pong(client_time):
 @rpc("any_peer", "call_local", "reliable")
 func send_player_info(name_str):
 	var sender_id = multiplayer.get_remote_sender_id()
+	# Validierung: Name kürzen und bereinigen
+	var safe_name = str(name_str).strip_edges()
+	if safe_name.length() > 20:
+		safe_name = safe_name.substr(0, 20)
+	if safe_name == "":
+		safe_name = "Racer " + str(sender_id)
 	add_player(sender_id)
-	players[sender_id]["name"] = name_str
+	players[sender_id]["name"] = safe_name
 	lobby_updated.emit()
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func sync_lobby_state(new_index):
+	# Bounds-Check gegen Array-Grenzen
+	if new_index < 0 or new_index >= maps.size():
+		return
 	current_map_index = new_index
 	lobby_state_changed.emit()
 
-@rpc("call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func start_game():
+	if current_map_index < 0 or current_map_index >= maps.size():
+		return
 	var map_data = maps[current_map_index]
 	get_tree().change_scene_to_file(map_data["scene_path"])
 
-@rpc("any_peer", "call_local", "reliable")
+@rpc("authority", "call_local", "reliable")
 func return_to_lobby():
 	get_tree().change_scene_to_file("res://levels/lobby.tscn")
