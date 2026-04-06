@@ -32,7 +32,7 @@ texture = ExtResource("2_weyph")
 shape = SubResource("CapsuleShape2D_weyph")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_interval = 0.05
+replication_interval = 0.1
 replication_config = SubResource("SceneReplicationConfig_r66lb")
 
 [node name="EngineSound" type="AudioStreamPlayer2D" parent="."]

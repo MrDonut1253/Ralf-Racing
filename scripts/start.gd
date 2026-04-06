@@ -1,13 +1,13 @@
 extends Node
 
-@onready var code_input: LineEdit = $Buttons.get_node_or_null("IPAddress") 
+@onready var code_input: LineEdit = $Buttons.get_node_or_null("IPAddress")
 @onready var status_label: Label = $Buttons.get_node_or_null("StatusLabel")
 @onready var name_input: LineEdit = $Buttons.get_node_or_null("NameInput")
 
 func _ready():
 	if not NetworkManager.status_update.is_connected(_on_status_update):
 		NetworkManager.status_update.connect(_on_status_update)
-	
+
 	if name_input: name_input.text = NetworkManager.my_local_name
 	if code_input: code_input.text = ""
 
@@ -40,7 +40,7 @@ func on_host_pressed() -> void:
 		get_tree().change_scene_to_file("res://levels/lobby.tscn")
 	else:
 		_set_ui_disabled(false)
-		if status_label: status_label.text = "Fehler beim Host-Start."
+		# Status wurde schon vom NetworkManager gesetzt
 
 func on_join_pressed() -> void:
 	var code = ""
@@ -52,19 +52,10 @@ func on_join_pressed() -> void:
 	_set_ui_disabled(true)
 	_save_name()
 
-	# Timeout: Falls Join nach 10 Sekunden nicht klappt, UI wieder freigeben
-	var timeout_timer = get_tree().create_timer(10.0)
-	var join_completed := false
-	timeout_timer.timeout.connect(func():
-		if not join_completed:
-			join_completed = true
-			_set_ui_disabled(false)
-			if status_label: status_label.text = "Verbindung fehlgeschlagen. Versuche es erneut."
-			NetworkManager.reset_network()
-	)
-
-	await NetworkManager.join_game(code)
-	join_completed = true
+	var success = await NetworkManager.join_game(code)
+	if not success:
+		# Timeout/Fehler wurde schon vom NetworkManager behandelt
+		_set_ui_disabled(false)
 
 func on_exit_button_pressed() -> void:
 	NetworkManager.reset_network()

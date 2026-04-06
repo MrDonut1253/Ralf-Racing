@@ -18,7 +18,14 @@ var game_node = null
 @export var server_rotation := 0.0
 @export var current_speed := 0.0
 var player_index := 0
-const INTERPOLATION_SPEED = 20.0
+const INTERPOLATION_SPEED = 15.0
+
+# Interpolation mit Prediction
+var prev_server_position := Vector2.ZERO
+var server_velocity := Vector2.ZERO
+var time_since_last_update := 0.0
+const SNAP_DISTANCE = 300.0
+const REPLICATION_INTERVAL = 0.1
 
 # --- PHYSIK (Original + Verbesserungen) ---
 var max_speed = 550.0
@@ -78,13 +85,24 @@ func _physics_process(delta):
 	else:
 		knockback_velocity = Vector2.ZERO
 
-	# Netzwerk-Interpolation für Remote-Spieler
+	# Netzwerk-Interpolation mit Velocity-Prediction
 	if not is_multiplayer_authority():
-		if position.distance_to(server_position) > 200.0:
+		# Velocity aus aufeinanderfolgenden Server-Updates berechnen
+		if server_position != prev_server_position:
+			if time_since_last_update > 0.001:
+				server_velocity = (server_position - prev_server_position) / time_since_last_update
+			prev_server_position = server_position
+			time_since_last_update = 0.0
+		time_since_last_update += delta
+
+		# Predicted Position: Server-Position + geschätzte Bewegung seit letztem Update
+		var predicted_pos = server_position + server_velocity * min(time_since_last_update, REPLICATION_INTERVAL * 2.0)
+
+		if position.distance_to(predicted_pos) > SNAP_DISTANCE:
 			position = server_position
 			rotation = server_rotation
 		else:
-			position = position.lerp(server_position, delta * INTERPOLATION_SPEED)
+			position = position.lerp(predicted_pos, delta * INTERPOLATION_SPEED)
 			rotation = lerp_angle(rotation, server_rotation, delta * INTERPOLATION_SPEED)
 		return
 
