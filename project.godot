@@ -8,13 +8,17 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
-config/name="Ralf-Racing Beta"
-config/version="0.4"
+config/name="Ralf-Racing Beta (claude)"
+config/version="0.6"
 run/main_scene="uid://bpcqpxnfru0qf"
-config/features=PackedStringArray("4.5", "Mobile")
-boot_splash/fullsize=false
+config/features=PackedStringArray("4.6", "Mobile")
+boot_splash/stretch_mode=0
 boot_splash/use_filter=false
 boot_splash/image="uid://0aicq7gp1ffh"
 config/icon="uid://0aicq7gp1ffh"

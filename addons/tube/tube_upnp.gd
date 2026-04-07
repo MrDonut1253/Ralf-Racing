@@ -18,7 +18,7 @@ var mutex := Mutex.new()
 var mapping_queue: Array[Callable] = []
 
 func raise_warning(message: String):
-	push_warning(message)
+	# push_warning(message) # Auskommentiert, da es oft harmlose Meldungen spammt
 	warning_raised.emit(message)
 
 func _init() -> void:

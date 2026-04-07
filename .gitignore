@@ -16,3 +16,5 @@ export.cfg
 .vscode/
 .idea/
 
+windows/
+*.exe

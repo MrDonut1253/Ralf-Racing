@@ -17,7 +17,7 @@ const RACE_LOGIC_SCRIPT = "res://scripts/game_modes/race_mode.gd"
 # Diese Variable steuert, ob gefahren werden darf. 
 # Da sie in game.gd ist, finden Host und Client sie immer!
 var game_started := false 
-var players_loaded_count := 0
+var ready_players := []
 
 # Countdown
 var countdown_value := 4
@@ -75,10 +75,16 @@ func _attach_race_logic():
 @rpc("any_peer", "call_local", "reliable")
 func notify_im_ready():
 	if not multiplayer.is_server(): return
-	players_loaded_count += 1
+	var sender_id = multiplayer.get_remote_sender_id()
+	if sender_id == 0:
+		sender_id = multiplayer.get_unique_id()
+		
+	if not ready_players.has(sender_id):
+		ready_players.append(sender_id)
+		
 	# Peers + Host = erwartete Spieler; clamp um Race Condition abzufangen
 	var expected = max(multiplayer.get_peers().size() + 1, 1)
-	if players_loaded_count >= expected:
+	if ready_players.size() >= expected:
 		_start_game_sequence()
 
 func _start_game_sequence():
@@ -151,7 +157,7 @@ func _return_to_menu():
 
 func _on_player_connected(_id): pass
 func _on_player_disconnected(id):
-	if players_loaded_count > 0:
-		players_loaded_count -= 1
+	if ready_players.has(id):
+		ready_players.erase(id)
 	if players_container.has_node(str(id)):
 		players_container.get_node(str(id)).queue_free()

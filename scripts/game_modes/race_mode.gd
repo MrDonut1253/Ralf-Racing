@@ -60,13 +60,23 @@ func _connect_checkpoints(level_node) -> int:
 
 func on_checkpoint_entered(body, checkpoint_num):
 	if not game_node.game_started: return
-	var p = players_data.get(body.name)
-	if p and p["next_checkpoint"] == checkpoint_num:
-		p["next_checkpoint"] += 1
+	if body.has_method("is_multiplayer_authority") and not body.is_multiplayer_authority(): return
+	_rpc_checkpoint_reached.rpc(body.name, checkpoint_num)
 
 func on_start_finish_entered(body):
 	if not game_node.game_started: return
-	var p = players_data.get(body.name)
+	if body.has_method("is_multiplayer_authority") and not body.is_multiplayer_authority(): return
+	_rpc_start_finish_reached.rpc(body.name)
+
+@rpc("any_peer", "call_local", "reliable")
+func _rpc_checkpoint_reached(player_id, checkpoint_num):
+	var p = players_data.get(player_id)
+	if p and p["next_checkpoint"] == checkpoint_num:
+		p["next_checkpoint"] += 1
+
+@rpc("any_peer", "call_local", "reliable")
+func _rpc_start_finish_reached(player_id):
+	var p = players_data.get(player_id)
 	# Dynamisch: alle Checkpoints müssen passiert sein (nicht hardcoded 4)
 	if p and p["next_checkpoint"] == total_checkpoints + 1:
 		var lap_time = p["stopwatch_time"] - p["lap_start_time"]
@@ -74,8 +84,38 @@ func on_start_finish_entered(body):
 		p["lap_start_time"] = p["stopwatch_time"]
 		p["completed_laps"] += 1
 		p["next_checkpoint"] = 1
+		
+		if p["completed_laps"] == TOTAL_LAPS - 1:
+			_show_final_lap(player_id)
+			
 		if p["completed_laps"] >= TOTAL_LAPS:
-			finish_player(body.name)
+			finish_player(player_id)
+
+func _show_final_lap(player_id):
+	if player_id == str(multiplayer.get_unique_id()):
+		var label = Label.new()
+		label.text = "FINAL LAP!"
+		
+		var custom_font = load("res://assets/font.ttf")
+		if custom_font:
+			label.add_theme_font_override("font", custom_font)
+			
+		label.add_theme_font_size_override("font_size", 64)
+		label.add_theme_color_override("font_color", Color.WHITE)
+		label.add_theme_color_override("font_outline_color", Color.BLACK)
+		label.add_theme_constant_override("outline_size", 8)
+		
+		var viewport_size = get_viewport().get_visible_rect().size
+		label.position = (viewport_size / 2) - Vector2(160, 50)
+		label.pivot_offset = label.size / 2
+		
+		var hud = game_node.get_parent().get_node_or_null("HUD")
+		if hud:
+			hud.add_child(label)
+			var tween = create_tween()
+			tween.tween_property(label, "scale", Vector2(1.5, 1.5), 0.3).set_trans(Tween.TRANS_ELASTIC)
+			tween.tween_property(label, "modulate:a", 0.0, 1.5).set_delay(1.0)
+			tween.tween_callback(label.queue_free)
 
 # --- DATEN MANAGEMENT ---
 func on_player_spawned(node):

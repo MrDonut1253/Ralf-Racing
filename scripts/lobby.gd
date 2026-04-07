@@ -30,15 +30,28 @@ func _ready():
 
 	if code_label:
 		if NetworkManager.current_lobby_code != "":
-			code_label.text = "LOBBY CODE: " + NetworkManager.current_lobby_code
+			code_label.text = "LOBBY CODE: " + NetworkManager.current_lobby_code + " (Klick zum Kopieren)"
 		else:
 			code_label.text = "Warte auf Code..."
+		code_label.mouse_filter = Control.MOUSE_FILTER_STOP
+		if not code_label.gui_input.is_connected(_on_code_label_gui_input):
+			code_label.gui_input.connect(_on_code_label_gui_input)
 
 	# Host-UI einmalig setzen statt jeden Frame
 	var is_host = multiplayer.is_server()
 	if start_button: start_button.visible = is_host
 	if prev_btn: prev_btn.visible = is_host
 	if next_btn: next_btn.visible = is_host
+
+func _on_code_label_gui_input(event):
+	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
+		if NetworkManager.current_lobby_code != "":
+			DisplayServer.clipboard_set(NetworkManager.current_lobby_code)
+			var old_text = code_label.text
+			code_label.text = "CODE KOPIERT!"
+			await get_tree().create_timer(1.0).timeout
+			if is_instance_valid(code_label):
+				code_label.text = old_text
 
 func _on_lobby_updated():
 	_update_player_list()
@@ -64,7 +77,7 @@ func _on_start_button_pressed():
 func on_exit_button_pressed() -> void:
 	if multiplayer.is_server():
 		NetworkManager.kicked_by_host.rpc()
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(0.4).timeout
 	NetworkManager.reset_network()
 	get_tree().change_scene_to_file("res://levels/menu.tscn")
 

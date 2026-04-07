@@ -16,9 +16,9 @@ func _on_status_update(message):
 
 func _save_name():
 	if name_input and name_input.text.strip_edges() != "":
-		NetworkManager.my_local_name = name_input.text.strip_edges()
+		NetworkManager.set_local_name(name_input.text.strip_edges())
 	else:
-		NetworkManager.my_local_name = "Racer " + str(randi() % 1000)
+		NetworkManager.set_local_name("Racer " + str(randi() % 1000))
 
 func _set_ui_disabled(val: bool):
 	var buttons_node = $Buttons
@@ -52,19 +52,22 @@ func on_join_pressed() -> void:
 	_set_ui_disabled(true)
 	_save_name()
 
-	# Timeout: Falls Join nach 10 Sekunden nicht klappt, UI wieder freigeben
-	var timeout_timer = get_tree().create_timer(10.0)
-	var join_completed := false
+	# Timeout: Großzügig genug für 2 Join-Versuche zu je ~35s plus Buffer.
+	# NetworkManager meldet eigene Status-Updates während des Versuchs - dieser Timer ist
+	# nur das letzte Sicherheitsnetz falls join_game() komplett hängt.
+	var timeout_timer = get_tree().create_timer(80.0)
+	var join_completed := [false]
 	timeout_timer.timeout.connect(func():
-		if not join_completed:
-			join_completed = true
+		if not is_instance_valid(self): return
+		if not join_completed[0]:
+			join_completed[0] = true
 			_set_ui_disabled(false)
 			if status_label: status_label.text = "Verbindung fehlgeschlagen. Versuche es erneut."
 			NetworkManager.reset_network()
 	)
 
 	await NetworkManager.join_game(code)
-	join_completed = true
+	join_completed[0] = true
 
 func on_exit_button_pressed() -> void:
 	NetworkManager.reset_network()

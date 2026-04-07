@@ -378,11 +378,15 @@ func _initiate_local_signaling() -> void:
 func _initiate_tracker(p_url: String) -> void:
 	var tracker := TubeTracker.new()
 	var error := tracker.connect_to_url(p_url)
+	# Auto-Reconnect erst NACH dem ersten connect_to_url scharf schalten —
+	# falls die initiale Connect-Funktion synchron einen Fehler wirft (kaputte
+	# URL etc.) wollen wir keinen Endlos-Loop produzieren.
+	tracker.auto_reconnect = true
 	_tracker_initiated.emit(tracker)
-	
+
 	if error:
 		return
-	
+
 	_trackers.append(tracker)
 	tracker.connected.connect(
 		_on_tracker_connected.bind(tracker)
@@ -393,6 +397,9 @@ func _initiate_tracker(p_url: String) -> void:
 	tracker.interval_timeout.connect(
 		_on_tracker_interval_timeout.bind(tracker)
 	)
+	# Kein Handler für `disconnected` nötig — der Tracker meldet sich bei
+	# `connected` von alleine wieder, sobald der Reconnect erfolgreich war,
+	# und _on_tracker_connected feuert dann erneut die announce-Logik.
 
 
 func _on_tracker_connected(p_tracker: TubeTracker): 
